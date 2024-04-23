@@ -5,7 +5,9 @@ using System;
 
 public class PInputManager : MonoBehaviour
 {
-    public event Action InputDetected;
+    public delegate void InputDetected(KeyCode key);
+
+    public static event InputDetected OnInputReceived;
     void Update()
     {
         DetectInputs();
@@ -13,25 +15,23 @@ public class PInputManager : MonoBehaviour
 
     void DetectInputs()
     {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            
-        }
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
 
+        if (Input.GetKey(KeyCode.D))
+        {
+            OnInputReceived?.Invoke(KeyCode.D);
         }
-      
+        else if (Input.GetKey(KeyCode.A))
+        {
+            OnInputReceived?.Invoke(KeyCode.A);
+        }
+        if (Input.GetKey(KeyCode.W))
+        {
+            OnInputReceived?.Invoke(KeyCode.W);
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            OnInputReceived?.Invoke(KeyCode.S);
+        }
     }
-}
-
-public class MovementPlayer : MonoBehaviour
-{
-
-}
-
-public class AnimationPlayer : MonoBehaviour
-{
-
 }
 

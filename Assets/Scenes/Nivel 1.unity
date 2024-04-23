@@ -240,6 +240,9 @@ GameObject:
   - component: {fileID: 944239347}
   - component: {fileID: 944239346}
   - component: {fileID: 944239348}
+  - component: {fileID: 944239351}
+  - component: {fileID: 944239350}
+  - component: {fileID: 944239349}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -356,6 +359,45 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.923481, y: 1.3394966, z: 0.2}
   m_Center: {x: -0.046250224, y: 0.6697483, z: 0}
+--- !u!114 &944239349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944239344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bac249963762df9488dc91642c141aaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animatior: {fileID: 944239346}
+--- !u!114 &944239350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944239344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a077db011011f254990b45c117e85b4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &944239351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944239344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19fcf50938afb14a80ada51160fef5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 944239345}
+  _speed: 3
 --- !u!1 &947464686
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,7 +410,7 @@ GameObject:
   - component: {fileID: 947464689}
   - component: {fileID: 947464688}
   - component: {fileID: 947464687}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Suelo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
