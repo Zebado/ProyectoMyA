@@ -6,16 +6,28 @@ using UnityEngine;
 public class PAnimationController : MonoBehaviour
 {
     [SerializeField] Animator _animatior;
-    private void Start()
+
+    private void OnEnable()
     {
-        PInputManager.OnInputReceived += PlayAnimation;
+        PInputManager.OnInputReceived += PlayAnimationRun;
+        PInputManager.OnInputStopped += StopAnimationRun;
     }
 
-    private void PlayAnimation(KeyCode key)
+    private void PlayAnimationRun(KeyCode key)
     {
-        if(KeyCode.D == key)
+        if (KeyCode.D == key || KeyCode.A == key)
         {
             _animatior.SetInteger("AnimState", 1);
         }
+    }
+    void StopAnimationRun()
+    {
+        _animatior.SetInteger("AnimState", 0);
+    }
+    private void OnDisable()
+    {
+        PInputManager.OnInputReceived -= PlayAnimationRun;
+        PInputManager.OnInputStopped -= StopAnimationRun;
+
     }
 }

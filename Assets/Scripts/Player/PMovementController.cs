@@ -13,15 +13,17 @@ public class PMovementController : MonoBehaviour
     {
         PInputManager.OnInputReceived += HandleInput;
     }
-  
+
     private void HandleInput(KeyCode key)
     {
         if (key == KeyCode.A)
         {
+            OrientPlayer(key);
             MoveHorizontal(-1);
         }
         else if (key == KeyCode.D)
         {
+            OrientPlayer(key);
             MoveHorizontal(1);
         }
     }
@@ -29,11 +31,27 @@ public class PMovementController : MonoBehaviour
     {
         float horizontalMove = direction * _speed * Time.deltaTime;
 
-        transform.Translate(horizontalMove, 0f, 0f);
+        _player.Translate(horizontalMove, 0f, 0f);
     }
-    private void OnDestroy()
+    void OrientPlayer(KeyCode key)
+    {
+        if (key == KeyCode.A)
+        {
+            if (_player.transform.localScale.x != -1)
+            {
+                _player.transform.localScale = new Vector2(-Mathf.Abs(_player.transform.localScale.x), _player.transform.localScale.y);
+            }
+        }
+        else if (key == KeyCode.D)
+        {
+            if (_player.transform.localScale.x != 1)
+            {
+                _player.transform.localScale = new Vector2(Mathf.Abs(_player.transform.localScale.x), _player.transform.localScale.y);
+            }
+        }
+    }
+    private void OnDisable()
     {
         PInputManager.OnInputReceived -= HandleInput;
-
     }
 }
