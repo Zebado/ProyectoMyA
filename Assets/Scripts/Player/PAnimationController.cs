@@ -10,12 +10,13 @@ public class PAnimationController : MonoBehaviour
     private void OnEnable()
     {
         PInputManager.OnInputReceived += PlayAnimationRun;
+        PInputManager.OnInputReceived += PlayAttack;
         PInputManager.OnInputStopped += StopAnimationRun;
     }
 
     private void PlayAnimationRun(KeyCode key)
     {
-        if (KeyCode.D == key || KeyCode.A == key)
+        if (key == KeyCode.D || key == KeyCode.A)
         {
             _animatior.SetInteger("AnimState", 1);
         }
@@ -23,6 +24,13 @@ public class PAnimationController : MonoBehaviour
     void StopAnimationRun()
     {
         _animatior.SetInteger("AnimState", 0);
+    }
+    void PlayAttack(KeyCode key)
+    {
+        if (key == KeyCode.K)
+        {
+            _animatior.SetBool("Attack1", true);
+        }
     }
     private void OnDisable()
     {
