@@ -11,11 +11,11 @@ public class PInputManager : MonoBehaviour
     public delegate void InputDisable();
     public static event InputDisable OnInputStopped;
 
-    LifePlayer _lifeplayer;
+    LifePlayerHandler _lifeplayer;
     bool _isRight { get; set; }
     private void Awake()
     {
-       _lifeplayer = GetComponent<LifePlayer>();
+       _lifeplayer = GetComponent<LifePlayerHandler>();
     }
     void Update()
     {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LifePlayer : MonoBehaviour
+public class LifePlayerHandler : MonoBehaviour
 {
     float _lifemax = 100;
     [SerializeField]float _currentLife;
