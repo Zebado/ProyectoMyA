@@ -9,33 +9,27 @@ public class PAnimationController : MonoBehaviour
 
     private void OnEnable()
     {
-        PInputManager.OnInputReceived += PlayAnimationRun;
-        PInputManager.OnInputReceived += PlayAttack;
-        PInputManager.OnInputStopped += StopAnimationRun;
+        PInputManager.OnStartRunAnimation += StartAnimationRun;
+        PInputManager.OnStopRunAnimation += StopAnimationRun;
+        PInputManager.OnAttack += PlayAttack;
     }
 
-    private void PlayAnimationRun(KeyCode key)
-    {
-        if (key == KeyCode.D || key == KeyCode.A)
-        {
-            _animatior.SetInteger("AnimState", 1);
-        }
+    private void StartAnimationRun()
+    {  
+            _animatior.SetInteger("AnimState", 1);       
     }
     void StopAnimationRun()
     {
         _animatior.SetInteger("AnimState", 0);
     }
-    void PlayAttack(KeyCode key)
+    void PlayAttack()
     {
-        if (key == KeyCode.K)
-        {
             _animatior.SetBool("Attack1", true);
-        }
     }
     private void OnDisable()
     {
-        PInputManager.OnInputReceived -= PlayAnimationRun;
-        PInputManager.OnInputStopped -= StopAnimationRun;
-
+        PInputManager.OnStartRunAnimation -= StartAnimationRun;
+        PInputManager.OnStopRunAnimation -= StopAnimationRun;
+        PInputManager.OnAttack -= PlayAttack;
     }
 }

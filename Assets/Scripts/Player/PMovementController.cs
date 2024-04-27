@@ -16,55 +16,45 @@ public class PMovementController : MonoBehaviour
     }
     private void OnEnable()
     {
-        PInputManager.OnInputReceived += HandleInput;
+        PInputManager.OnMoveRight += MoveRight;
+        PInputManager.OnMoveLeft += MoveLeft;
+        PInputManager.OnJump += Jump;
+    }
+    private void OnDisable()
+    {
+        PInputManager.OnMoveRight -= MoveRight;
+        PInputManager.OnMoveLeft -= MoveLeft;
+        PInputManager.OnJump -= Jump;
+    }
+   
+    private void MoveLeft()
+    {
+
+        _rgbd.velocity = new Vector2(-_speed, _rgbd.velocity.y);
+        OrientPlayer(KeyCode.A);
     }
 
-    private void HandleInput(KeyCode key)
+    private void MoveRight()
     {
-        if (key == KeyCode.A)
-        {
-            OrientPlayer(key);
-            MoveHorizontal(-1);
-        }
-        else if (key == KeyCode.D)
-        {
-            OrientPlayer(key);
-            MoveHorizontal(1);
-        }
-        else if (key == KeyCode.W)
-        {
-            Jump();
-        }
+        _rgbd.velocity = new Vector2(_speed, _rgbd.velocity.y);
+        OrientPlayer(KeyCode.D);
     }
-    void MoveHorizontal(float direction)
-    {
-        float horizontalMove = direction * _speed * Time.deltaTime;
-
-        _player.Translate(horizontalMove, 0f, 0f);
-    }
+   
     void Jump()
     {
         _rgbd.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
     }
+
     void OrientPlayer(KeyCode key)
     {
-        if (key == KeyCode.A)
+        if (key == KeyCode.A && transform.localScale.x > 0)
         {
-            if (_player.transform.localScale.x != -1)
-            {
-                _player.transform.localScale = new Vector2(-Mathf.Abs(_player.transform.localScale.x), _player.transform.localScale.y);
-            }
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
-        else if (key == KeyCode.D)
+        else if (key == KeyCode.D && transform.localScale.x < 0)
         {
-            if (_player.transform.localScale.x != 1)
-            {
-                _player.transform.localScale = new Vector2(Mathf.Abs(_player.transform.localScale.x), _player.transform.localScale.y);
-            }
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
     }
-    private void OnDisable()
-    {
-        PInputManager.OnInputReceived -= HandleInput;
-    }
+   
 }

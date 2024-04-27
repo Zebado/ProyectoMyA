@@ -5,8 +5,15 @@ using System;
 
 public class PInputManager : MonoBehaviour
 {
-    public delegate void InputDetected(KeyCode key);
-    public static event InputDetected OnInputReceived;
+    public delegate void InputDetected();
+    public static event InputDetected OnMoveRight;
+    public static event InputDetected OnMoveLeft;
+    public static event InputDetected OnJump;
+
+    public delegate void AnimationAction();
+    public static event AnimationAction OnStartRunAnimation;
+    public static event AnimationAction OnStopRunAnimation;
+    public static event AnimationAction OnAttack;
 
     public delegate void InputDisable();
     public static event InputDisable OnInputStopped;
@@ -15,7 +22,7 @@ public class PInputManager : MonoBehaviour
     bool _isRight { get; set; }
     private void Awake()
     {
-       _lifeplayer = GetComponent<LifePlayerHandler>();
+        _lifeplayer = GetComponent<LifePlayerHandler>();
     }
     void Update()
     {
@@ -28,28 +35,31 @@ public class PInputManager : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             _isRight = true;
-            OnInputReceived?.Invoke(KeyCode.D);          
+            OnMoveRight?.Invoke();
+            OnStartRunAnimation?.Invoke();
         }
         else if (Input.GetKey(KeyCode.A))
         {
             _isRight = false;
-            OnInputReceived?.Invoke(KeyCode.A);
+            OnMoveLeft?.Invoke();
+            OnStartRunAnimation?.Invoke();
         }
         if (Input.GetKey(KeyCode.W))
         {
-            OnInputReceived?.Invoke(KeyCode.W);
+            OnJump?.Invoke();
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            OnInputReceived?.Invoke(KeyCode.S);
+
         }
         if (!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
         {
             OnInputStopped?.Invoke();
+            OnStopRunAnimation?.Invoke();
         }
         if (Input.GetKeyDown(KeyCode.K))
         {
-            OnInputReceived?.Invoke(KeyCode.K);
+
         }
     }
 }
