@@ -5,10 +5,10 @@ using System;
 
 public class DamageHandler : MonoBehaviour
 {
-    public delegate void DetectDamage(float damage);
+    public delegate void DetectDamage(int damage);
     public static event DetectDamage damage;
 
-    [SerializeField] float _damage = 10;
+    [SerializeField] int _damage = 1;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

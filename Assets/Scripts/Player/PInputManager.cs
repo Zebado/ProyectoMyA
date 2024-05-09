@@ -44,7 +44,7 @@ public class PInputManager : MonoBehaviour
             OnMoveLeft?.Invoke();
             OnStartRunAnimation?.Invoke();
         }
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             OnJump?.Invoke();
         }
@@ -54,8 +54,8 @@ public class PInputManager : MonoBehaviour
         }
         if (!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
         {
-            OnInputStopped?.Invoke();
             OnStopRunAnimation?.Invoke();
+            OnInputStopped?.Invoke();
         }
         if (Input.GetKeyDown(KeyCode.K))
         {

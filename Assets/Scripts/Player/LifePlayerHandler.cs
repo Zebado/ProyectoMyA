@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class LifePlayerHandler : MonoBehaviour
 {
-    float _lifemax = 100;
-    [SerializeField]float _currentLife;
+    int _lifemax = 3;
+    [SerializeField]int _currentLife;
     public bool _onDead { get; private set; }
 
     private void OnEnable()
@@ -19,9 +19,9 @@ public class LifePlayerHandler : MonoBehaviour
         _currentLife = _lifemax;
         _onDead = false;
     }
-    private void SubstractLife(float damage)
+    private void SubstractLife(int damage)
     {
-        _currentLife -= damage;
+        _currentLife -= damage > 1 ? damage : 1;
         if(_currentLife <= 0)
         {
             Ondead();

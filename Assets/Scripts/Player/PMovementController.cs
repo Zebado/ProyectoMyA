@@ -19,17 +19,18 @@ public class PMovementController : MonoBehaviour
         PInputManager.OnMoveRight += MoveRight;
         PInputManager.OnMoveLeft += MoveLeft;
         PInputManager.OnJump += Jump;
+        PInputManager.OnInputStopped += StopMove;
     }
     private void OnDisable()
     {
         PInputManager.OnMoveRight -= MoveRight;
         PInputManager.OnMoveLeft -= MoveLeft;
         PInputManager.OnJump -= Jump;
+        PInputManager.OnInputStopped -= StopMove;
     }
-   
+
     private void MoveLeft()
     {
-
         _rgbd.velocity = new Vector2(-_speed, _rgbd.velocity.y);
         OrientPlayer(KeyCode.A);
     }
@@ -39,10 +40,17 @@ public class PMovementController : MonoBehaviour
         _rgbd.velocity = new Vector2(_speed, _rgbd.velocity.y);
         OrientPlayer(KeyCode.D);
     }
-   
+    private void StopMove()
+    {
+        _rgbd.velocity = new Vector2(0, _rgbd.velocity.y);
+    }
+
     void Jump()
     {
-        _rgbd.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+        if (CheckGround.isGrounded)
+        {
+            _rgbd.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+        }
     }
 
     void OrientPlayer(KeyCode key)
@@ -56,5 +64,4 @@ public class PMovementController : MonoBehaviour
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
     }
-   
 }
