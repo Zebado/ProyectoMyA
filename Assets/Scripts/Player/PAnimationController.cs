@@ -12,6 +12,7 @@ public class PAnimationController : MonoBehaviour
         PInputManager.OnStartRunAnimation += StartAnimationRun;
         PInputManager.OnStopRunAnimation += StopAnimationRun;
         PInputManager.OnAttack += PlayAttack;
+        PInputManager.OnJump += JumpAnimation;
     }
 
     private void StartAnimationRun()
@@ -25,6 +26,10 @@ public class PAnimationController : MonoBehaviour
     void PlayAttack()
     {
             _animatior.SetBool("Attack1", true);
+    }
+    void JumpAnimation()
+    {
+        _animatior.SetBool("Jump", true);
     }
     private void OnDisable()
     {

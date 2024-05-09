@@ -12,6 +12,7 @@ public class LifePlayerHandler : MonoBehaviour
     private void OnEnable()
     {
         DamageHandler.damage += SubstractLife;
+        Posion.addlife += RecoverLife;
     }
 
     private void Awake()
@@ -27,6 +28,10 @@ public class LifePlayerHandler : MonoBehaviour
             Ondead();
         }
     }
+    private void RecoverLife()
+    {
+        _currentLife += 1;
+    }
     public void Ondead()
     {
         _onDead = true;
@@ -34,5 +39,7 @@ public class LifePlayerHandler : MonoBehaviour
     private void OnDisable()
     {
         DamageHandler.damage -= SubstractLife;
+        Posion.addlife -= RecoverLife;
+
     }
 }

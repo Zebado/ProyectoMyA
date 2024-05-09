@@ -11,6 +11,7 @@ public class HudPlayer : MonoBehaviour
     private void OnEnable()
     {
         DamageHandler.damage += DisableHeart;
+        Posion.addlife += ActiveHeart;
     }
     private void Awake()
     {
@@ -19,18 +20,23 @@ public class HudPlayer : MonoBehaviour
     }
     private void DisableHeart(int i)
     {
-        if (_currentIndex >= 0)
+        if (_currentIndex > 0)
         {
             _currentIndex--;
             _hearts[_currentIndex].SetActive(false);
         }
     }
-    public void ActiveHeart(int i)
+    public void ActiveHeart()
     {
-        _hearts[i].SetActive(true);
+        if (_currentIndex < maxIndex)
+        {
+            _hearts[_currentIndex].SetActive(true);
+            _currentIndex++;
+        }
     }
     private void OnDisable()
     {
-        DamageHandler.damage += DisableHeart;
+        DamageHandler.damage -= DisableHeart;
+        Posion.addlife -= ActiveHeart;
     }
 }

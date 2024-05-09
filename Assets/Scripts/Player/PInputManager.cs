@@ -44,7 +44,7 @@ public class PInputManager : MonoBehaviour
             OnMoveLeft?.Invoke();
             OnStartRunAnimation?.Invoke();
         }
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             OnJump?.Invoke();
         }
