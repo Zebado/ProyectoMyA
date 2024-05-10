@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class LifePlayerHandler : MonoBehaviour
 {
-    int _lifemax = 3;
-    [SerializeField]int _currentLife;
+    public static int _lifemax { get; private set; } = 3;
+public static int _currentLife { get; private set; }
     public bool _onDead { get; private set; }
 
     private void OnEnable()

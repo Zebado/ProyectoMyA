@@ -31,20 +31,14 @@ public class PMovementController : MonoBehaviour
 
     private void MoveLeft()
     {
-        if (CheckGround.isGrounded)
-        {
             _rgbd.velocity = new Vector2(-_speed, _rgbd.velocity.y);
-            OrientPlayer(KeyCode.A);
-        }
+            OrientPlayer(KeyCode.A);       
     }
 
     private void MoveRight()
     {
-        if (CheckGround.isGrounded)
-        {
             _rgbd.velocity = new Vector2(_speed, _rgbd.velocity.y);
-            OrientPlayer(KeyCode.D);
-        }
+            OrientPlayer(KeyCode.D);       
     }
     private void StopMove()
     {
