@@ -3,16 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PInputManager))]
+
 public class PAnimationController : MonoBehaviour
 {
     [SerializeField] Animator _animatior;
+    PInputManager _managerInput;
+    SpriteRenderer _spriteRenderer;
 
+    private void Awake()
+    {
+        _managerInput = GetComponent<PInputManager>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
     private void OnEnable()
     {
-        PInputManager.OnStartRunAnimation += StartAnimationRun;
-        PInputManager.OnStopRunAnimation += StopAnimationRun;
-        PInputManager.OnAttack += PlayAttack;
-        PInputManager.OnJump += JumpAnimation;
+        _managerInput.OnMoveRight += MoveRight;
+        _managerInput.OnMoveLeft += MoveLeft;
+        _managerInput.OnInputStopped += StopAnimationRun;
+        //_managerInput.OnAttack += PlayAttack;
+        _managerInput.OnJump += JumpAnimation;
     }
 
     private void StartAnimationRun()
@@ -31,10 +41,34 @@ public class PAnimationController : MonoBehaviour
     {
         _animatior.SetBool("Jump", true);
     }
+    private void MoveLeft()
+    {     
+        OrientPlayer(-1);
+        StartAnimationRun();
+    }
+
+    private void MoveRight()
+    {
+        OrientPlayer(1);
+        StartAnimationRun();
+    }
+    void OrientPlayer(int direction)
+    {
+        Debug.Log(direction);
+        if (direction == -1)
+        {
+            _spriteRenderer.flipX = true;
+        }
+        else if (direction == 1)
+        {
+            _spriteRenderer.flipX = false;
+        }
+    }
     private void OnDisable()
     {
-        PInputManager.OnStartRunAnimation -= StartAnimationRun;
-        PInputManager.OnStopRunAnimation -= StopAnimationRun;
-        PInputManager.OnAttack -= PlayAttack;
+        _managerInput.OnMoveRight -= StartAnimationRun;
+        _managerInput.OnMoveLeft -= StartAnimationRun;
+        _managerInput.OnInputStopped -= StopAnimationRun;
+        //_managerInput.OnAttack -= PlayAttack;
     }
 }

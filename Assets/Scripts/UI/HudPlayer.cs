@@ -6,19 +6,19 @@ using UnityEngine.UI;
 public class HudPlayer : MonoBehaviour
 {
     [SerializeField] GameObject[] _hearts;
-    int maxIndex;
+    int _maxIndex;
     int _currentIndex;
     private void OnEnable()
     {
-        DamageHandler.damage += DisableHeart;
-        Posion.addlife += ActiveHeart;
+        EventManager.SusbcribeToEvent(EventsType.Event_SubstractLife, DisableHeart);
+        EventManager.SusbcribeToEvent(EventsType.Event_RecoverLife, ActiveHeart);
     }
     private void Awake()
     {
-        maxIndex = _hearts.Length;
-        _currentIndex = maxIndex;
+        _maxIndex = _hearts.Length;
+        _currentIndex = _maxIndex;
     }
-    private void DisableHeart(int i)
+    private void DisableHeart(params object[] parameters)
     {
         if (_currentIndex > 0)
         {
@@ -26,9 +26,9 @@ public class HudPlayer : MonoBehaviour
             _hearts[_currentIndex].SetActive(false);
         }
     }
-    public void ActiveHeart()
+    public void ActiveHeart(params object[] parameters)
     {
-        if (_currentIndex < maxIndex)
+        if (_currentIndex < _maxIndex)
         {
             _hearts[_currentIndex].SetActive(true);
             _currentIndex++;
@@ -36,7 +36,7 @@ public class HudPlayer : MonoBehaviour
     }
     private void OnDisable()
     {
-        DamageHandler.damage -= DisableHeart;
-        Posion.addlife -= ActiveHeart;
+        EventManager.UnsusbcribeToEvent(EventsType.Event_SubstractLife, DisableHeart);
+        EventManager.UnsusbcribeToEvent(EventsType.Event_RecoverLife, ActiveHeart);
     }
 }

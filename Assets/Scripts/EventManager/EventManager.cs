@@ -5,9 +5,11 @@ using UnityEngine;
 
 public enum EventsType
 {
-     Event_PlayerDead,
-     Event_Win
-
+    Event_PlayerDead,
+    Event_Win,
+    Event_PlayerLifeChanged,
+    Event_SubstractLife,
+    Event_RecoverLife
 }
 public class EventManager
 {
@@ -19,31 +21,25 @@ public class EventManager
     public static void SusbcribeToEvent(EventsType eventsType, MethodToSuscribe methodToSuscribe)
     {
         //si el diccionario no esta inicializado, lo hago
-        if(_events == null) _events = new Dictionary<EventsType, MethodToSuscribe>();
+        if (_events == null) _events = new Dictionary<EventsType, MethodToSuscribe>();
 
-        //si no existe el evento en el diccionario
-        _events.TryAdd(eventsType, null);
+        if (!_events.ContainsKey(eventsType)) _events.Add(eventsType, null);
+
         //Suscribo el nuevo metodo al evento
-        _events[eventsType] += methodToSuscribe; 
+        _events[eventsType] += methodToSuscribe;
     }
 
     public static void UnsusbcribeToEvent(EventsType eventsType, MethodToSuscribe methodToUnSuscribe)
     {
-        if (_events == null) return;
-
-        if (!_events.ContainsKey(eventsType)) return;
+        if (_events == null || !_events.ContainsKey(eventsType))            
 
         _events[eventsType] -= methodToUnSuscribe;
     }
 
     public static void TriggerEvent(EventsType eventsType, params object[] parameters)
     {
-        if (_events == null) return;
+        if (_events == null || !_events.ContainsKey(eventsType)) return;
 
-        if (!_events.ContainsKey(eventsType)) return;
-
-        if (_events[eventsType] == null) return;
-
-        _events[eventsType](parameters);
+        _events[eventsType]?.Invoke(parameters);
     }
 }

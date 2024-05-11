@@ -1,45 +1,69 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LifePlayerHandler : MonoBehaviour
 {
-    public static int _lifemax { get; private set; } = 3;
-public static int _currentLife { get; private set; }
+    public int currentLife { get; private set; }
+    public int lifeMax { get; private set; } = 3;
     public bool _onDead { get; private set; }
+
+    bool _potionTaken = false;
 
     private void OnEnable()
     {
-        DamageHandler.damage += SubstractLife;
-        Posion.addlife += RecoverLife;
+        EventManager.SusbcribeToEvent(EventsType.Event_SubstractLife, SubstractLifeDelegate);
+        EventManager.SusbcribeToEvent(EventsType.Event_RecoverLife, RecoverLife);
     }
 
     private void Awake()
     {
-        _currentLife = _lifemax;
+        currentLife = lifeMax;
         _onDead = false;
+    }
+
+    private void SubstractLifeDelegate(params object[] parameters)
+    {
+        if (parameters.Length > 0 && parameters[0] is int)
+        {
+            int damage = (int)parameters[0];
+            SubstractLife(damage);
+        }
     }
     private void SubstractLife(int damage)
     {
-        _currentLife -= damage > 1 ? damage : 1;
-        if(_currentLife <= 0)
+        currentLife -= damage > 1 ? damage : 1;
+        if (currentLife <= 0)
         {
             Ondead();
         }
+        else
+        {
+            EventManager.TriggerEvent(EventsType.Event_PlayerLifeChanged, currentLife);
+        }
     }
-    private void RecoverLife()
+    private void RecoverLife(params object[] parameters)
     {
-        _currentLife += 1;
+        currentLife += (int)parameters[0];
+        EventManager.TriggerEvent(EventsType.Event_PlayerLifeChanged, currentLife);
     }
+
     public void Ondead()
     {
         _onDead = true;
+        EventManager.TriggerEvent(EventsType.Event_PlayerDead);
     }
     private void OnDisable()
     {
-        DamageHandler.damage -= SubstractLife;
-        Posion.addlife -= RecoverLife;
+        EventManager.UnsusbcribeToEvent(EventsType.Event_RecoverLife, RecoverLife);
+        EventManager.UnsusbcribeToEvent(EventsType.Event_SubstractLife, SubstractLifeDelegate);
+    }
 
+    public bool IsPotionTaken()
+    {
+        return _potionTaken;
+    }
+
+    public void SetPotionTaken(bool value)
+    {
+        _potionTaken = value;
     }
 }

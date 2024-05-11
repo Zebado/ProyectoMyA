@@ -1,25 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class PInputManager : MonoBehaviour
 {
     public delegate void InputDetected();
-    public static event InputDetected OnMoveRight;
-    public static event InputDetected OnMoveLeft;
-    public static event InputDetected OnJump;
-
-    public delegate void AnimationAction();
-    public static event AnimationAction OnStartRunAnimation;
-    public static event AnimationAction OnStopRunAnimation;
-    public static event AnimationAction OnAttack;
+    public event InputDetected OnMoveRight;
+    public event InputDetected OnMoveLeft;
+    public event InputDetected OnJump;
 
     public delegate void InputDisable();
-    public static event InputDisable OnInputStopped;
+    public event InputDisable OnInputStopped;
 
     LifePlayerHandler _lifeplayer;
-    bool _isRight { get; set; }
     private void Awake()
     {
         _lifeplayer = GetComponent<LifePlayerHandler>();
@@ -30,19 +21,17 @@ public class PInputManager : MonoBehaviour
     }
 
     void DetectInputs()
-    {
+    {        
         if (_lifeplayer._onDead == true) return;
-        if (Input.GetKey(KeyCode.D))
+
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            _isRight = true;
-            OnMoveRight?.Invoke();
-            OnStartRunAnimation?.Invoke();
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            _isRight = false;
             OnMoveLeft?.Invoke();
-            OnStartRunAnimation?.Invoke();
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            OnMoveRight?.Invoke();
+
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -54,7 +43,6 @@ public class PInputManager : MonoBehaviour
         }
         if (!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
         {
-            OnStopRunAnimation?.Invoke();
             OnInputStopped?.Invoke();
         }
         if (Input.GetKeyDown(KeyCode.K))

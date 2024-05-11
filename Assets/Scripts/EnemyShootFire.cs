@@ -10,9 +10,16 @@ public class EnemyShootFire : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            var bullet = Instantiate(_bulletPrefab);
+            var bullet = GetBullet();
 
             bullet.transform.position = this.transform.position;
         }
+    }
+    Bullet GetBullet()
+    {
+        //pool- dar bala
+        var bullet = Instantiate(_bulletPrefab);
+
+        return bullet;
     }
 }
