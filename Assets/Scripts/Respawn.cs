@@ -1,0 +1,14 @@
+using UnityEngine;
+
+public class Respawn : MonoBehaviour
+{
+    [SerializeField] GameObject _player;
+    [SerializeField] Transform _respawnPoint;
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            _player.transform.position = _respawnPoint.transform.position;
+        }
+    }
+}

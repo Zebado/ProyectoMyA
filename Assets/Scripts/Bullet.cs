@@ -4,20 +4,41 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] float _timeLine;
+    [SerializeField] float _timeLine = 3;
     float _currentLifeTime;
+    [SerializeField] float _speed;
 
-    void Awake()
+    private void Awake()
     {
-        _currentLifeTime = _timeLine;
+        _currentLifeTime = 0;
     }
-
     void Update()
     {
-        _currentLifeTime -= Time.deltaTime;
+        transform.Translate(-Vector3.right * _speed * Time.deltaTime);
+        _currentLifeTime += Time.deltaTime;
+        if (_currentLifeTime <= _timeLine) return;
 
-        if (_currentLifeTime > 0) return;
+        BulletFactory.Instance.ReturnObjectToPool(this);
 
-        Destroy(gameObject);
+    }
+    private void Reset()
+    {
+        _currentLifeTime = 0;
+    }
+    public static void TurnOn(Bullet bullet)
+    {
+        bullet.gameObject.SetActive(true);
+    }
+    public static void TurnOff(Bullet bullet)
+    { 
+        bullet.Reset();
+        bullet.gameObject.SetActive(false);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject)
+        {
+            BulletFactory.Instance.ReturnObjectToPool(this);
+        }
     }
 }

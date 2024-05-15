@@ -1,25 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyShootFire : MonoBehaviour
 {
-    [SerializeField] Bullet _bulletPrefab;
+    float _CurrentTime;
+    float _maxTime = 3;
+    [SerializeField] Transform _point;
 
+    private void Awake()
+    {
+        _CurrentTime = 0;
+    }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        _CurrentTime += Time.deltaTime;
+
+        if (_CurrentTime >= _maxTime)
         {
-            var bullet = GetBullet();
-
-            bullet.transform.position = this.transform.position;
+            _CurrentTime = 0;
+            var bullet = BulletFactory.Instance.GetObjectFromPool();    
+            bullet.transform.position = _point.transform.position;
         }
-    }
-    Bullet GetBullet()
-    {
-        //pool- dar bala
-        var bullet = Instantiate(_bulletPrefab);
-
-        return bullet;
     }
 }

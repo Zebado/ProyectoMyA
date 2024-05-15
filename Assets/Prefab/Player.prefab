@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec436aaec335d841aaa229913340f04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 0
 --- !u!61 &4516424487833875847
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -110,7 +109,7 @@ GameObject:
   - component: {fileID: 4275822113167104165}
   m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,7 +124,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.81, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.36075786, y: 0.36075786, z: 0.36075786}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4863110692204428964}
@@ -218,7 +217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 6138606055538414687}
   _speed: 3
-  _jumpForce: 7
+  _jumpForce: 4.7
 --- !u!114 &9038463470467089426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +242,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfafbaf269c0a9d498dcbb978874c08c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentLife: 0
 --- !u!114 &433468246193009028
 MonoBehaviour:
   m_ObjectHideFlags: 0
