@@ -20,6 +20,7 @@ public class PMovementController : MonoBehaviour
         _managerInput.OnMoveLeft += MoveLeft;
         _managerInput.OnJump += Jump;
         _managerInput.OnInputStopped += StopMove;
+
     }
     private void OnDisable()
     {

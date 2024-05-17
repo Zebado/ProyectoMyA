@@ -10,11 +10,13 @@ public class PAnimationController : MonoBehaviour
     [SerializeField] Animator _animatior;
     PInputManager _managerInput;
     SpriteRenderer _spriteRenderer;
+    bool _isDead;
 
     private void Awake()
     {
         _managerInput = GetComponent<PInputManager>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _isDead = false;
     }
     private void OnEnable()
     {
@@ -23,26 +25,38 @@ public class PAnimationController : MonoBehaviour
         _managerInput.OnInputStopped += StopAnimationRun;
         //_managerInput.OnAttack += PlayAttack;
         _managerInput.OnJump += JumpAnimation;
+        EventManager.SusbcribeToEvent(EventsType.Event_PlayerDead, OnPlayerDead);
+        EventManager.SusbcribeToEvent(EventsType.Event_SubstractLife, HurtAnimation);
     }
 
     private void StartAnimationRun()
-    {  
-            _animatior.SetInteger("AnimState", 1);       
+    {
+        _animatior.SetInteger("AnimState", 1);
     }
     void StopAnimationRun()
     {
         _animatior.SetInteger("AnimState", 0);
     }
+    void DeathAnimation()
+    {
+        _animatior.SetTrigger("Death");
+        _isDead = true;
+    }
+    void HurtAnimation(params object[] parameters)
+    {
+        if (_isDead) return;
+        _animatior.SetTrigger("Hurt");
+    }
     void PlayAttack()
     {
-            _animatior.SetBool("Attack1", true);
+        _animatior.SetBool("Attack1", true);
     }
     void JumpAnimation()
     {
         _animatior.SetBool("Jump", true);
     }
     private void MoveLeft()
-    {     
+    {
         OrientPlayer(-1);
         StartAnimationRun();
     }
@@ -64,11 +78,17 @@ public class PAnimationController : MonoBehaviour
             _spriteRenderer.flipX = false;
         }
     }
+    private void OnPlayerDead(params object[] parameters)
+    {
+        DeathAnimation();
+    }
     private void OnDisable()
     {
         _managerInput.OnMoveRight -= StartAnimationRun;
         _managerInput.OnMoveLeft -= StartAnimationRun;
         _managerInput.OnInputStopped -= StopAnimationRun;
         //_managerInput.OnAttack -= PlayAttack;
+        EventManager.UnsusbcribeToEvent(EventsType.Event_PlayerDead, OnPlayerDead);
+        EventManager.UnsusbcribeToEvent(EventsType.Event_SubstractLife, HurtAnimation);
     }
 }

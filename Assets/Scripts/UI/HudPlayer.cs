@@ -8,6 +8,7 @@ public class HudPlayer : MonoBehaviour
     [SerializeField] GameObject[] _hearts;
     int _maxIndex;
     int _currentIndex;
+    [SerializeField]LifePlayerHandler _lifePlayer;
     private void OnEnable()
     {
         EventManager.SusbcribeToEvent(EventsType.Event_SubstractLife, DisableHeart);
@@ -22,6 +23,7 @@ public class HudPlayer : MonoBehaviour
     {
         if (_currentIndex > 0)
         {
+            if (_lifePlayer.currentLife == _currentIndex) return;
             _currentIndex--;
             _hearts[_currentIndex].SetActive(false);
         }

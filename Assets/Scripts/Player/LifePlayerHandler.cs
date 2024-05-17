@@ -8,6 +8,10 @@ public class LifePlayerHandler : MonoBehaviour
 
     bool _potionTaken = false;
 
+    float _damageTime;
+    float _damageTimeMax;
+    [SerializeField] bool _isInvulnerable;
+
     private void OnEnable()
     {
         EventManager.SusbcribeToEvent(EventsType.Event_SubstractLife, SubstractLifeDelegate);
@@ -18,8 +22,21 @@ public class LifePlayerHandler : MonoBehaviour
     {
         currentLife = lifeMax;
         _onDead = false;
+        _isInvulnerable = false;
+        _damageTime = 0;
+        _damageTimeMax = 3;
     }
-
+    private void Update()
+    {
+        if (_isInvulnerable)
+        {
+            _damageTime += Time.deltaTime;
+            if (_damageTime > _damageTimeMax)
+            {
+                _isInvulnerable = false;
+            }
+        }
+    }
     private void SubstractLifeDelegate(params object[] parameters)
     {
         if (parameters.Length > 0 && parameters[0] is int)
@@ -30,7 +47,9 @@ public class LifePlayerHandler : MonoBehaviour
     }
     private void SubstractLife(int damage)
     {
+        if (_isInvulnerable || _onDead) return;
         currentLife -= damage > 1 ? damage : 1;
+        _isInvulnerable = true;
         if (currentLife <= 0)
         {
             Ondead();
@@ -48,6 +67,7 @@ public class LifePlayerHandler : MonoBehaviour
 
     public void Ondead()
     {
+        if (_onDead) return;
         _onDead = true;
         EventManager.TriggerEvent(EventsType.Event_PlayerDead);
     }

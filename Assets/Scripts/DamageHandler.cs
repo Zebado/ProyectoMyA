@@ -7,6 +7,7 @@ public class DamageHandler : MonoBehaviour
 {
     [SerializeField] int _damage = 1;
 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))

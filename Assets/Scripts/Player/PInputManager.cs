@@ -21,8 +21,12 @@ public class PInputManager : MonoBehaviour
     }
 
     void DetectInputs()
-    {        
-        if (_lifeplayer._onDead == true) return;
+    {
+        if (_lifeplayer._onDead == true)
+        {
+            OnInputStopped?.Invoke();
+            return;
+        }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
