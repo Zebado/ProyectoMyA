@@ -23,7 +23,6 @@ public class PAnimationController : MonoBehaviour
         _managerInput.OnMoveRight += MoveRight;
         _managerInput.OnMoveLeft += MoveLeft;
         _managerInput.OnInputStopped += StopAnimationRun;
-        //_managerInput.OnAttack += PlayAttack;
         _managerInput.OnJump += JumpAnimation;
         EventManager.SusbcribeToEvent(EventsType.Event_PlayerDead, OnPlayerDead);
         EventManager.SusbcribeToEvent(EventsType.Event_SubstractLife, HurtAnimation);
@@ -87,7 +86,6 @@ public class PAnimationController : MonoBehaviour
         _managerInput.OnMoveRight -= StartAnimationRun;
         _managerInput.OnMoveLeft -= StartAnimationRun;
         _managerInput.OnInputStopped -= StopAnimationRun;
-        //_managerInput.OnAttack -= PlayAttack;
         EventManager.UnsusbcribeToEvent(EventsType.Event_PlayerDead, OnPlayerDead);
         EventManager.UnsusbcribeToEvent(EventsType.Event_SubstractLife, HurtAnimation);
     }

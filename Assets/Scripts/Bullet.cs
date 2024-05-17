@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     float _currentLifeTime;
     [SerializeField] float _speed;
 
-    private void Awake()
+    private void OnEnable()
     {
         _currentLifeTime = 0;
     }
@@ -30,15 +30,14 @@ public class Bullet : MonoBehaviour
         bullet.gameObject.SetActive(true);
     }
     public static void TurnOff(Bullet bullet)
-    { 
+    {
         bullet.Reset();
         bullet.gameObject.SetActive(false);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject)
-        {
-            BulletFactory.Instance.ReturnObjectToPool(this);
-        }
+        Debug.Log(collision);
+        BulletFactory.Instance.ReturnObjectToPool(this);
+        TurnOff(this);
     }
 }

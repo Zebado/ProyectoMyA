@@ -54,15 +54,10 @@ public class LifePlayerHandler : MonoBehaviour
         {
             Ondead();
         }
-        else
-        {
-            EventManager.TriggerEvent(EventsType.Event_PlayerLifeChanged, currentLife);
-        }
     }
     private void RecoverLife(params object[] parameters)
     {
         currentLife += (int)parameters[0];
-        EventManager.TriggerEvent(EventsType.Event_PlayerLifeChanged, currentLife);
     }
 
     public void Ondead()

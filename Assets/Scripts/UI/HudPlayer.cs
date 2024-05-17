@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +9,26 @@ public class HudPlayer : MonoBehaviour
     [SerializeField] GameObject[] _hearts;
     int _maxIndex;
     int _currentIndex;
-    [SerializeField]LifePlayerHandler _lifePlayer;
+    [SerializeField] LifePlayerHandler _lifePlayer;
+    [SerializeField] GameObject _win;
+    [SerializeField] GameObject _lose;
     private void OnEnable()
     {
         EventManager.SusbcribeToEvent(EventsType.Event_SubstractLife, DisableHeart);
         EventManager.SusbcribeToEvent(EventsType.Event_RecoverLife, ActiveHeart);
+        EventManager.SusbcribeToEvent(EventsType.Event_Win, WinGame);
+        EventManager.SusbcribeToEvent(EventsType.Event_PlayerDead, LoseGame);
     }
+
+    private void WinGame(object[] parameters)
+    {
+        _win.SetActive(true);
+    }
+    void LoseGame(object[] parameters)
+    {
+        _lose.SetActive(true);
+    }
+
     private void Awake()
     {
         _maxIndex = _hearts.Length;
@@ -40,5 +55,7 @@ public class HudPlayer : MonoBehaviour
     {
         EventManager.UnsusbcribeToEvent(EventsType.Event_SubstractLife, DisableHeart);
         EventManager.UnsusbcribeToEvent(EventsType.Event_RecoverLife, ActiveHeart);
+        EventManager.UnsusbcribeToEvent(EventsType.Event_Win, WinGame);
+        EventManager.UnsusbcribeToEvent(EventsType.Event_PlayerDead, LoseGame);
     }
 }
