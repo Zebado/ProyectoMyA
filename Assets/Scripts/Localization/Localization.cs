@@ -47,6 +47,9 @@ public class Localization : MonoBehaviour
         var result = www.downloadHandler.text;
 
         _languageCodex = LanguageSplit.LoadCSV(result, "web");
+
+        onUpdate();
+
     }
 
     public string GetTranslate(string ID)
