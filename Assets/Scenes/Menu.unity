@@ -1800,6 +1800,7 @@ GameObject:
   - component: {fileID: 1512103394}
   - component: {fileID: 1512103393}
   - component: {fileID: 1512103392}
+  - component: {fileID: 1512103395}
   m_Layer: 5
   m_Name: Jugar
   m_TagString: Untagged
@@ -1921,6 +1922,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1512103390}
   m_CullTransparentMesh: 1
+--- !u!114 &1512103395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512103390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb0c10c38f84304694cc325a5757ac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 1512103392}
 --- !u!114 &1531502595 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7524210555484410768, guid: 756639324e693e543a658f2b25e16ba6, type: 3}
