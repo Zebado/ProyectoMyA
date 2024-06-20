@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,10 +7,11 @@ public class TextTranslate : MonoBehaviour
 
     [SerializeField] string _id;
     [SerializeField] Localization _localization;
-    [SerializeField] Text _myText;
+    [SerializeField] TextMeshProUGUI _myText;
 
     private void Awake()
     {
+        _localization = Localization.Instance;
         _localization.onUpdate += ChangeLanguage;
     }
 

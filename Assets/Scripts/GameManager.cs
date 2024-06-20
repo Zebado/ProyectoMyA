@@ -5,6 +5,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public bool winGame { get; private set; } = false;
+
+    [SerializeField] GameObject _hudLanguage;
     private void Awake()
     {
         if (Instance == null)
@@ -24,7 +26,24 @@ public class GameManager : MonoBehaviour
     public void ChangeScene()
     {
         winGame = false;
-        SceneManager.LoadScene(1);
+
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (currentSceneIndex == 0)
+        {
+            SceneManager.LoadScene(1);
+        }
+        else if (currentSceneIndex == 1)
+        {
+            SceneManager.LoadScene(0);
+        }
+    }
+    public void OpenHudLanguage()
+    {
+        _hudLanguage.SetActive(true);
+    }
+    public void ExitButtonHud()
+    {
+        _hudLanguage.SetActive(false);
     }
     public void ExitGame()
     {
