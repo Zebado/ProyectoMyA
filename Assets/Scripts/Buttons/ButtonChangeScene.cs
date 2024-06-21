@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,6 @@ public class ButtonChangeScene : MonoBehaviour
         _button.onClick.AddListener(GameManager.Instance.ChangeScene);
 
     }
-
     private void OnDisable()
     {
         _button.onClick?.RemoveListener(GameManager.Instance.ChangeScene);

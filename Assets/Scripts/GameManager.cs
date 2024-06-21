@@ -37,14 +37,6 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(0);
         }
     }
-    public void OpenHudLanguage()
-    {
-        _hudLanguage.SetActive(true);
-    }
-    public void ExitButtonHud()
-    {
-        _hudLanguage.SetActive(false);
-    }
     public void ExitGame()
     {
         UnityEditor.EditorApplication.isPlaying = false;

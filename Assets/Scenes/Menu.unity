@@ -1738,10 +1738,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1531502595}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ExitButtonHud
-        m_Mode: 1
+      - m_Target: {fileID: 1234674375}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1800,7 +1800,6 @@ GameObject:
   - component: {fileID: 1512103394}
   - component: {fileID: 1512103393}
   - component: {fileID: 1512103392}
-  - component: {fileID: 1512103395}
   m_Layer: 5
   m_Name: Jugar
   m_TagString: Untagged
@@ -1872,7 +1871,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1531502595}
+      - m_Target: {fileID: 7524210555484410768, guid: 756639324e693e543a658f2b25e16ba6, type: 3}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: ChangeScene
         m_Mode: 1
@@ -1922,30 +1921,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1512103390}
   m_CullTransparentMesh: 1
---- !u!114 &1512103395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1512103390}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbb0c10c38f84304694cc325a5757ac8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _button: {fileID: 1512103392}
---- !u!114 &1531502595 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7524210555484410768, guid: 756639324e693e543a658f2b25e16ba6, type: 3}
-  m_PrefabInstance: {fileID: 4123642658337125176}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6440df38ac2ee004cb3141f3f7ad3e76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1594944039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2029,17 +2004,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1531502595}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: OpenHudLanguage
-        m_Mode: 1
+      - m_Target: {fileID: 1234674375}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1594944042
 MonoBehaviour:

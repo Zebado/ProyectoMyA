@@ -86,6 +86,7 @@ public class PAnimationController : MonoBehaviour
         _managerInput.OnMoveRight -= StartAnimationRun;
         _managerInput.OnMoveLeft -= StartAnimationRun;
         _managerInput.OnInputStopped -= StopAnimationRun;
+        _managerInput.OnJump -= JumpAnimation;
         EventManager.UnsusbcribeToEvent(EventsType.Event_PlayerDead, OnPlayerDead);
         EventManager.UnsusbcribeToEvent(EventsType.Event_SubstractLife, HurtAnimation);
     }

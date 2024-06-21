@@ -7,7 +7,6 @@ public enum EventsType
 {
     Event_PlayerDead,
     Event_Win,
-    Event_PlayerLifeChanged,
     Event_SubstractLife,
     Event_RecoverLife
 }
