@@ -7,13 +7,14 @@ using UnityEngine;
 
 public class PAnimationController : MonoBehaviour
 {
-    [SerializeField] Animator _animatior;
+    [SerializeField] Animator _animator;
     PInputManager _managerInput;
     SpriteRenderer _spriteRenderer;
     bool _isDead;
 
     private void Awake()
     {
+        _animator = GetComponent<Animator>();
         _managerInput = GetComponent<PInputManager>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _isDead = false;
@@ -30,29 +31,29 @@ public class PAnimationController : MonoBehaviour
 
     private void StartAnimationRun()
     {
-        _animatior.SetInteger("AnimState", 1);
+        _animator.SetInteger("AnimState", 1);
     }
     void StopAnimationRun()
     {
-        _animatior.SetInteger("AnimState", 0);
+        _animator.SetInteger("AnimState", 0);
     }
     void DeathAnimation()
     {
-        _animatior.SetTrigger("Death");
+        _animator.SetTrigger("Death");
         _isDead = true;
     }
     void HurtAnimation(params object[] parameters)
     {
         if (_isDead) return;
-        _animatior.SetTrigger("Hurt");
+        _animator.SetTrigger("Hurt");
     }
     void PlayAttack()
     {
-        _animatior.SetBool("Attack1", true);
+        _animator.SetBool("Attack1", true);
     }
     void JumpAnimation()
     {
-        _animatior.SetBool("Jump", true);
+        _animator.SetBool("Jump", true);
     }
     private void MoveLeft()
     {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -31,7 +32,6 @@ public class EventManager
     public static void UnsusbcribeToEvent(EventsType eventsType, MethodToSuscribe methodToUnSuscribe)
     {
         if (_events == null || !_events.ContainsKey(eventsType))            
-
         _events[eventsType] -= methodToUnSuscribe;
     }
 
