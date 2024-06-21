@@ -11,6 +11,7 @@ public class LifePlayerHandler : MonoBehaviour
     float _damageTime;
     float _damageTimeMax;
     [SerializeField] bool _isInvulnerable;
+    [SerializeField] GameObject _hud;
 
     private void OnEnable()
     {
@@ -36,6 +37,10 @@ public class LifePlayerHandler : MonoBehaviour
                 _isInvulnerable = false;
             }
         }
+    }
+    public void ActiveHud()
+    {
+        _hud.SetActive(true);
     }
     private void SubstractLifeDelegate(params object[] parameters)
     {

@@ -39,8 +39,11 @@ public class PAnimationController : MonoBehaviour
     }
     void DeathAnimation()
     {
-        _animator.SetTrigger("Death");
-        _isDead = true;
+        if (_animator != null)
+        {
+            _animator.SetTrigger("Death");
+            _isDead = true;
+        }
     }
     void HurtAnimation(params object[] parameters)
     {
