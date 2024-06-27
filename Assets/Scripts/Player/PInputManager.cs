@@ -6,6 +6,7 @@ public class PInputManager : MonoBehaviour
     public event InputDetected OnMoveRight;
     public event InputDetected OnMoveLeft;
     public event InputDetected OnJump;
+    public event InputDetected OnCheckPoint;
 
     public delegate void InputDisable();
     public event InputDisable OnInputStopped;
@@ -52,7 +53,10 @@ public class PInputManager : MonoBehaviour
         {
             OnInputStopped?.Invoke();
         }
-
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            OnCheckPoint?.Invoke();
+        }
     }
 }
 

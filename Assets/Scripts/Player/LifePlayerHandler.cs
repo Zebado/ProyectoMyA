@@ -3,7 +3,7 @@ using UnityEngine;
 public class LifePlayerHandler : MonoBehaviour
 {
     public int currentLife { get; private set; }
-    public int lifeMax { get; private set; } = 3;
+    public int LifeMax { get; private set; } = 3;
     public bool _onDead { get; private set; }
 
     bool _potionTaken = false;
@@ -21,7 +21,7 @@ public class LifePlayerHandler : MonoBehaviour
 
     private void Awake()
     {
-        currentLife = lifeMax;
+        currentLife = LifeMax;
         _onDead = false;
         _isInvulnerable = false;
         _damageTime = 0;
@@ -37,6 +37,10 @@ public class LifePlayerHandler : MonoBehaviour
                 _isInvulnerable = false;
             }
         }
+    }
+    public void setMaxLife()
+    {
+        currentLife = LifeMax;  
     }
     public void ActiveHud()
     {
@@ -85,5 +89,13 @@ public class LifePlayerHandler : MonoBehaviour
     public void SetPotionTaken(bool value)
     {
         _potionTaken = value;
+    }
+    public void SetCurrentLife(int life)
+    {
+        currentLife = life;
+        if (currentLife <= 0)
+        {
+            Ondead();
+        }
     }
 }

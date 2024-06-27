@@ -12,7 +12,7 @@ public class Posion : MonoBehaviour
 
         if (lifeHandler.IsPotionTaken()) return;
 
-        if (lifeHandler.currentLife >= lifeHandler.lifeMax) return;
+        if (lifeHandler.currentLife >= lifeHandler.LifeMax) return;
 
         lifeHandler.SetPotionTaken(true);
 

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class GameManager : MonoBehaviour
     public bool winGame { get; private set; } = false;
 
     [SerializeField] GameObject _hudLanguage;
+    Stack<Memento> _checkpoints = new Stack<Memento>();
+    MementoPlayer _player;
     private void Awake()
     {
         if (Instance == null)
@@ -19,9 +22,30 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void Start()
+    {
+        _player = FindObjectOfType<MementoPlayer>();
+    }
     private void OnEnable()
     {
         EventManager.SusbcribeToEvent(EventsType.Event_Win, WinGame);
+    }
+    public void LoadCheckPoint()
+    {
+        if(_checkpoints.Count > 0)
+        {
+            Memento memento = _checkpoints.Pop();
+            _player.RestoreState(memento);
+        }
+    }
+    public void SaveCheckPoint()
+    {
+        if(_player != null)
+        {
+            Memento memento = _player.SaveState();
+            _checkpoints.Push(memento);
+            Debug.Log(" Checkpoint guarado ");
+        }
     }
     public void ChangeScene()
     {
