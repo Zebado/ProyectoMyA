@@ -57,6 +57,10 @@ public class PInputManager : MonoBehaviour
         {
             OnCheckPoint?.Invoke();
         }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+
+        }
     }
 }
 

@@ -26,8 +26,8 @@ public class Localization : MonoBehaviour
                 {
                     GameObject localizationObject = new GameObject(typeof(Localization).Name);
                     _instance = localizationObject.AddComponent<Localization>();
-                    DontDestroyOnLoad(localizationObject);
                 }
+                DontDestroyOnLoad(_instance.gameObject);
             }
             return _instance;
         }
@@ -57,7 +57,7 @@ public class Localization : MonoBehaviour
         StartCoroutine(DownloadCSV(_webURL));
     }
 
-   
+
 
     IEnumerator DownloadCSV(string url)
     {
