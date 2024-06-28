@@ -24,6 +24,11 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
         _player = FindObjectOfType<MementoPlayer>();
     }
     private void OnEnable()
@@ -32,7 +37,7 @@ public class GameManager : MonoBehaviour
     }
     public void LoadCheckPoint()
     {
-        if(_checkpoints.Count > 0)
+        if (_checkpoints.Count > 0)
         {
             Memento memento = _checkpoints.Pop();
             _player.RestoreState(memento);
@@ -40,11 +45,10 @@ public class GameManager : MonoBehaviour
     }
     public void SaveCheckPoint()
     {
-        if(_player != null)
+        if (_player != null)
         {
             Memento memento = _player.SaveState();
             _checkpoints.Push(memento);
-            Debug.Log(" Checkpoint guarado ");
         }
     }
     public void ChangeScene()
