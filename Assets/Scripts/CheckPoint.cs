@@ -11,6 +11,7 @@ public class CheckPoint : MonoBehaviour
     private void OnEnable()
     {
         _inputManager.OnCheckPoint += CheckPointOn;
+        GameManager.Instance.SaveCheckPoint();
     }
     private void OnDisable()
     {

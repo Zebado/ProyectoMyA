@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _hudLanguage;
     Stack<Memento> _checkpoints = new Stack<Memento>();
     MementoPlayer _player;
+    Transform _transform;
     private void Awake()
     {
         if (Instance == null)
@@ -30,6 +31,10 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         _player = FindObjectOfType<MementoPlayer>();
+        if (_player != null)
+        {
+            SaveInitialCheckpoint();
+        }
     }
     private void OnEnable()
     {
@@ -41,6 +46,15 @@ public class GameManager : MonoBehaviour
         {
             Memento memento = _checkpoints.Pop();
             _player.RestoreState(memento);
+        }
+    }
+    private void SaveInitialCheckpoint()
+    {
+        if (_checkpoints.Count == 0 && _player != null)
+        {
+            Memento initialMemento = _player.SaveState();
+            _checkpoints.Push(initialMemento);
+            Debug.Log("Initial checkpoint saved.");
         }
     }
     public void SaveCheckPoint()
