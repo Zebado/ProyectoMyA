@@ -38,6 +38,8 @@ public class Localization : MonoBehaviour
     [SerializeField] Language _currentLang;
 
     Dictionary<Language, Dictionary<string, string>> _languageCodex;
+    public Language CurrentLanguage => _currentLang;
+    public Dictionary<Language, Dictionary<string, string>> LanguageCodex => _languageCodex;
 
     public event Action onUpdate = delegate { };
 
@@ -77,6 +79,10 @@ public class Localization : MonoBehaviour
 
     public string GetTranslate(string ID)
     {
+        if(_languageCodex == null || !_languageCodex.ContainsKey(_currentLang))
+        {
+            return String.Empty;
+        }
         var idsDictionary = _languageCodex[_currentLang];
 
         idsDictionary.TryGetValue(ID, out var result);

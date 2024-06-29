@@ -12,14 +12,19 @@ public class TextTranslate : MonoBehaviour
     private void Awake()
     {
         _localization = Localization.Instance;
-        _localization.onUpdate += ChangeLanguage;
+        _localization.onUpdate += ChangeLanguage;              
     }
-
-   void ChangeLanguage()
+    private void Start()
+    {
+        if (_localization.LanguageCodex != null && _localization.LanguageCodex.ContainsKey(_localization.CurrentLanguage))
+        {
+            ChangeLanguage();
+        }
+    }
+    void ChangeLanguage()
     {
         _myText.text = _localization.GetTranslate(_id);
     }
-
     private void OnDestroy()
     {
         _localization.onUpdate -= ChangeLanguage;
