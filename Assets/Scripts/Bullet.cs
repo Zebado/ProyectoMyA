@@ -34,10 +34,10 @@ public class Bullet : MonoBehaviour
         bullet.Reset();
         bullet.gameObject.SetActive(false);
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log(collision);
         BulletFactory.Instance.ReturnObjectToPool(this);
-        TurnOff(this);
+        TurnOff(this); 
     }
 }

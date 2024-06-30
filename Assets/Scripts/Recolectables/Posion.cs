@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class Posion : MonoBehaviour
@@ -16,10 +15,11 @@ public class Posion : MonoBehaviour
 
         lifeHandler.SetPotionTaken(true);
 
-        EventManager.TriggerEvent(EventsType.Event_RecoverLife,1);
+        EventManager.TriggerEvent(EventsType.Event_RecoverLife, 1);
 
         lifeHandler.SetPotionTaken(false);
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+
     }
 }

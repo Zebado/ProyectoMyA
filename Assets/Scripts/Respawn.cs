@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Respawn : MonoBehaviour
 {
-    [SerializeField] GameObject _player;
-    [SerializeField] Transform _respawnPoint;
     GameManager _gameManager;
 
     private void Awake()
@@ -14,7 +12,6 @@ public class Respawn : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            //_player.transform.position = _respawnPoint.transform.position;
             _gameManager.LoadCheckPoint();
         }
     }

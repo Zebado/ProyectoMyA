@@ -44,10 +44,17 @@ public class HudPlayer : MonoBehaviour
     }
     public void ActiveHeart(params object[] parameters)
     {
-        if (_currentIndex < _maxIndex)
+        if (parameters != null && parameters.Length > 0)
         {
-            _hearts[_currentIndex].SetActive(true);
-            _currentIndex++;
+            GameObject heart = parameters[0] as GameObject;
+            if (heart != null)
+            {
+                if (_currentIndex < _maxIndex)
+                {
+                    _hearts[_currentIndex].SetActive(true);
+                    _currentIndex++;
+                }
+            }
         }
     }
     private void OnDisable()
