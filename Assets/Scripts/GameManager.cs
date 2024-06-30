@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     {
         if (_checkpoints.Count > 0)
         {
-            Memento memento = _checkpoints.Pop();
+            Memento memento = _checkpoints.Peek();
             _player.RestoreState(memento);
         }
     }
