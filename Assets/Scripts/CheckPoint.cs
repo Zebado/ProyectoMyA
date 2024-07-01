@@ -7,6 +7,7 @@ public class CheckPoint : MonoBehaviour
     bool _IsTrigger;
     PInputManager _inputManager;
     [SerializeField] GameObject _text;
+    bool _checkpoint;
     private void OnEnable()
     {
         _inputManager.OnCheckPoint += CheckPointOn;
@@ -18,20 +19,16 @@ public class CheckPoint : MonoBehaviour
     }
     private void Awake()
     {
+        _checkpoint = false;
         _inputManager = FindAnyObjectByType<PInputManager>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !_checkpoint)
         {
             _text.SetActive(true);
+            _checkpoint = true;
             _IsTrigger = true;
-        }
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
