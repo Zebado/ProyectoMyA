@@ -46,8 +46,9 @@ public class HudPlayer : MonoBehaviour
     {
         if (parameters != null && parameters.Length > 0)
         {
-            GameObject heart = parameters[0] as GameObject;
-            if (heart != null)
+            int amount = Convert.ToInt32(parameters[0]);
+
+            for (int i = 0; i < amount; i++)
             {
                 if (_currentIndex < _maxIndex)
                 {

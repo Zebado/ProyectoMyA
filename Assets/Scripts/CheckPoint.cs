@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 public class CheckPoint : MonoBehaviour
 {
     bool _IsTrigger;
     PInputManager _inputManager;
+    [SerializeField] GameObject _text;
     private void OnEnable()
     {
         _inputManager.OnCheckPoint += CheckPointOn;
@@ -15,7 +14,7 @@ public class CheckPoint : MonoBehaviour
     }
     private void OnDisable()
     {
-        _inputManager.OnCheckPoint -= CheckPointOn; 
+        _inputManager.OnCheckPoint -= CheckPointOn;
     }
     private void Awake()
     {
@@ -25,7 +24,14 @@ public class CheckPoint : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            _text.SetActive(true);
             _IsTrigger = true;
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -37,10 +43,11 @@ public class CheckPoint : MonoBehaviour
     }
     public void CheckPointOn()
     {
-        if (_IsTrigger)     
+        if (_IsTrigger)
         {
             GameManager.Instance.SaveCheckPoint();
             Debug.Log("CheckPoint Saved");
+            _text.SetActive(false);
         }
     }
 }
