@@ -31,9 +31,17 @@ public class EventManager
 
     public static void UnsusbcribeToEvent(EventsType eventsType, MethodToSuscribe methodToUnSuscribe)
     {
-        if (_events == null || !_events.ContainsKey(eventsType))            
+        if (_events == null || !_events.ContainsKey(eventsType)) return;
+
         _events[eventsType] -= methodToUnSuscribe;
+
+        // Si no hay más suscriptores, eliminamos la entrada del diccionario
+        if (_events[eventsType] == null)
+        {
+            _events.Remove(eventsType);
+        }
     }
+
 
     public static void TriggerEvent(EventsType eventsType, params object[] parameters)
     {
