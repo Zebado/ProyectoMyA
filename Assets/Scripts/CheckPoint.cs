@@ -28,7 +28,7 @@ public class CheckPoint : MonoBehaviour
         {
             _text.SetActive(true);
             _checkpoint = true;
-            _IsTrigger = true;
+            _IsTrigger = true;  
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

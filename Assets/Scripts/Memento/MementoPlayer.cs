@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MementoPlayer : MonoBehaviour
+public class MementoPlayer : MonoBehaviour, IMemento
 {
     private Vector3 position;
     private LifePlayerHandler lifeHandler;
@@ -11,6 +11,7 @@ public class MementoPlayer : MonoBehaviour
     {
         lifeHandler = GetComponent<LifePlayerHandler>();
         position = transform.position;
+        GameManager.Instance.RegisterIMemento(this);
     }
 
     public void SetPosition(Vector3 newPosition)
@@ -29,5 +30,9 @@ public class MementoPlayer : MonoBehaviour
     {
         SetPosition(memento.PlayerPosition);
         lifeHandler.SetCurrentLife(memento.PlayerHealth);
+    }
+    private void OnDestroy()
+    {
+        GameManager.Instance.UnregisterIMemento(this);
     }
 }

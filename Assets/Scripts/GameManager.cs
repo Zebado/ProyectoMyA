@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject _hudLanguage;
     Stack<Memento> _checkpoints = new Stack<Memento>();
+    List<IMemento> _iMemento = new List<IMemento>();
     MementoPlayer _player;
-    Transform _transform;
     private void Awake()
     {
         if (Instance == null)
@@ -27,13 +27,22 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
-
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        _player = FindObjectOfType<MementoPlayer>();
-        if (_player != null)
+        SaveInitialCheckpoint();
+    }
+    public void RegisterIMemento(IMemento memento)
+    {
+        if (!_iMemento.Contains(memento))
         {
-            SaveInitialCheckpoint();
+            _iMemento.Add(memento);
+        }
+    }
+    public void UnregisterIMemento(IMemento memento)
+    {
+        if (_iMemento.Contains(memento))
+        {
+            _iMemento.Remove(memento);
         }
     }
     private void OnEnable()
@@ -45,23 +54,29 @@ public class GameManager : MonoBehaviour
         if (_checkpoints.Count > 0)
         {
             Memento memento = _checkpoints.Peek();
-            _player.RestoreState(memento);
+            foreach (var mementoOrigin in _iMemento)
+            {
+                mementoOrigin.RestoreState(memento);
+            }
         }
     }
     private void SaveInitialCheckpoint()
     {
-        if (_checkpoints.Count == 0 && _player != null)
+        if (_checkpoints.Count == 0 && _iMemento.Count > 0)
         {
-            Memento initialMemento = _player.SaveState();
-            _checkpoints.Push(initialMemento);
-            Debug.Log("Initial checkpoint saved.");
+            foreach (var mementoOrigin in _iMemento)
+            {
+                Memento initialMemento = mementoOrigin.SaveState();
+                _checkpoints.Push(initialMemento);
+                Debug.Log("Initial checkpoint saved.");
+            }
         }
     }
     public void SaveCheckPoint()
     {
-        if (_player != null)
+        foreach (var mementoOrigin in _iMemento)
         {
-            Memento memento = _player.SaveState();
+            Memento memento = mementoOrigin.SaveState();
             _checkpoints.Push(memento);
         }
     }
