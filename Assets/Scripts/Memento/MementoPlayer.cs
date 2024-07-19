@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MementoPlayer : MonoBehaviour, IMemento
+public class MementoPlayer : MonoBehaviour, IMemento, ICheckpointTrigger, IRespawneable
 {
     private Vector3 position;
     private LifePlayerHandler lifeHandler;
@@ -31,8 +31,18 @@ public class MementoPlayer : MonoBehaviour, IMemento
         SetPosition(memento.PlayerPosition);
         lifeHandler.SetCurrentLife(memento.PlayerHealth);
     }
+    public void ActivateCheckpoint()
+    {
+        GameManager.Instance.SaveCheckPoint();
+        Debug.Log("Checkpoint activated by player.");
+    }
     private void OnDestroy()
     {
         GameManager.Instance.UnregisterIMemento(this);
+    }
+
+    public void Respawn()
+    {
+        GameManager.Instance.LoadCheckPoint();
     }
 }

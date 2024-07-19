@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 
-
 public class CheckPoint : MonoBehaviour
 {
     bool _IsTrigger;
@@ -24,7 +23,9 @@ public class CheckPoint : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && !_checkpoint)
+        var checkpointTrigger = collision.GetComponent<ICheckpointTrigger>();
+
+        if (checkpointTrigger != null && !_checkpoint)
         {
             _text.SetActive(true);
             _checkpoint = true;
@@ -33,7 +34,8 @@ public class CheckPoint : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        var checkpointTrigger = collision.GetComponent<ICheckpointTrigger>();
+        if (checkpointTrigger != null)
         {
             _IsTrigger = false;
         }

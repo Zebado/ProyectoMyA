@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject _hudLanguage;
     Stack<Memento> _checkpoints = new Stack<Memento>();
     List<IMemento> _iMemento = new List<IMemento>();
-    MementoPlayer _player;
     private void Awake()
     {
         if (Instance == null)
