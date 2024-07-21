@@ -62298,6 +62298,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfafbaf269c0a9d498dcbb978874c08c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &682223757 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5918149503714366633, guid: e5104bb138403a240bfd9d1370634052, type: 3}
+  m_PrefabInstance: {fileID: 1484111685885736873}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &693854675
 GameObject:
   m_ObjectHideFlags: 0
@@ -63056,7 +63061,7 @@ MonoBehaviour:
     LensShift: {x: 0, y: 0}
     GateFit: 2
     FocusDistance: 10
-    m_SensorSize: {x: 1, y: 1}
+    m_SensorSize: {x: 36, y: 29}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -64321,19 +64326,19 @@ Camera:
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
+  m_projectionMatrixMode: 2
   m_GateFitMode: 2
   m_FOVAxisMode: 0
   m_Iso: 200
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 50
+  m_FocalLength: 25.114737
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
   m_Anamorphism: 0
-  m_SensorSize: {x: 36, y: 24}
+  m_SensorSize: {x: 36, y: 29}
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -64343,7 +64348,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -65275,7 +65280,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 2577445799061397170, guid: 7f54492dee14db542897308568543ef7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -67623,6 +67628,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 433468246193009028, guid: e5104bb138403a240bfd9d1370634052, type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 682223757}
     - target: {fileID: 6138606055538414687, guid: e5104bb138403a240bfd9d1370634052, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.719
