@@ -90,6 +90,10 @@ public class GameManager : MonoBehaviour
         }
         else if (currentSceneIndex == 1)
         {
+            SceneManager.LoadScene(2);
+        }
+        else if (currentSceneIndex == 2)
+        {
             SceneManager.LoadScene(0);
         }
     }
