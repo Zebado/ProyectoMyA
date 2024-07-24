@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 411140433822676884}
   - component: {fileID: 6440712586556972414}
+  - component: {fileID: 674737902562474595}
+  - component: {fileID: 6947909723265754156}
   - component: {fileID: 4528800728337655900}
   m_Layer: 0
   m_Name: CrazyEnemy
@@ -85,6 +87,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &674737902562474595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6848292201747746564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6c7fbac78138d14e99c48bb2fe41270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6947909723265754156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6848292201747746564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88f13235a8410744b9c4577b2c15d9db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healt: 0
+  _speed: 0
 --- !u!95 &4528800728337655900
 Animator:
   serializedVersion: 5

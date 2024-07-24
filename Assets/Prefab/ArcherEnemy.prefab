@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1715138641946618722}
   - component: {fileID: 5580892602474757321}
+  - component: {fileID: 6624674770922589146}
+  - component: {fileID: 7768802936233994222}
   - component: {fileID: 3495190949462071791}
   m_Layer: 0
   m_Name: ArcherEnemy
@@ -85,6 +87,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6624674770922589146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8055524602454289260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6c7fbac78138d14e99c48bb2fe41270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7768802936233994222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8055524602454289260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0df5192c804ab4c4bb2d90da2ff724bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &3495190949462071791
 Animator:
   serializedVersion: 5

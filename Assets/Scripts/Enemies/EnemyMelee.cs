@@ -6,11 +6,11 @@ public class EnemyMelee : EnemyBase
 {
     public override void Attack()
     {
-
+        _enemyAnimatior.AttackAnimation();
     }
 
     public override void Move()
     {
-
+       
     }
 }
