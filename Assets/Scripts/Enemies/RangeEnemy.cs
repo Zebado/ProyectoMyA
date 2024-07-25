@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangeEnemy : MonoBehaviour
+public class RangeEnemy : EnemyBase
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        enemyState.Update();
+        enemyState.ChangeState(new IdleState(), this);
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        enemyState.Update();
+    }
+    public override void Attack()
+    {
+        _enemyAnimatior.AttackAnimation();
     }
 }
