@@ -15,6 +15,10 @@ public abstract class EnemyBase : MonoBehaviour, Enemy
     private void Awake()
     {
         _enemyAnimatior = GetComponent<EnemyAnimator>();
+        if (enemyState == null)
+        {
+            enemyState = new EnemyState();
+        }
     }
     public abstract void Attack();
 

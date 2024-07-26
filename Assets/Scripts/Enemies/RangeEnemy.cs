@@ -6,7 +6,7 @@ public class RangeEnemy : EnemyBase
 {
     private void Start()
     {
-        enemyState.Update();
+        enemyState = new EnemyState();
         enemyState.ChangeState(new IdleState(), this);
     }
     private void Update()
