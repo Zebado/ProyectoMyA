@@ -41,8 +41,18 @@ public abstract class EnemyBase : MonoBehaviour, Enemy
     }
     internal void MoveTowards(Vector2 target)
     {
+        Vector2 direction = target - (Vector2)transform.position;
         transform.position = Vector2.MoveTowards(transform.position, target, _speed * Time.deltaTime);
         _enemyAnimatior.WalkAnimation();
+
+        if (direction.x > 0)
+        {
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+        else if (direction.x < 0)
+        {
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
     }
     public bool IsPlayerInRange(float distance)
     {
@@ -63,6 +73,6 @@ public abstract class EnemyBase : MonoBehaviour, Enemy
     protected virtual void Death()
     {
         _enemyAnimatior.DeathAnimation();
-        Destroy(gameObject);
+        EnemyManager.Instance.DespawnEnemy(this);
     }
 }
