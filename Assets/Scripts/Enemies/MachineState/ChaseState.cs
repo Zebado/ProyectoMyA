@@ -10,7 +10,7 @@ public class ChaseState : Entity
         _enemy = enemy as EnemyMelee;
     }
 
-    public void Execute()
+    public void Execute(EnemyBase enemy)
     {
         if (_enemy == null) return;
         if (_enemy.IsPlayerInRange(_enemy.attackRange))

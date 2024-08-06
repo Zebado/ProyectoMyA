@@ -10,7 +10,7 @@ public class IdleState : Entity
         _enemy = enemy;
     }
 
-    public void Execute()
+    public void Execute(EnemyBase enemy)
     {
         if (_enemy.IsPlayerInRange(_enemy.attackRange))
         {

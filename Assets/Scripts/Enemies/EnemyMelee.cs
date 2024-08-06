@@ -21,4 +21,9 @@ public class EnemyMelee : EnemyBase
     {
         _enemyAnimatior.AttackAnimation();
     }
+    public void SetPatrolPoints(Transform pointA, Transform pointB)
+    {
+        this.pointA = pointA;
+        this.pointB = pointB;
+    }
 }
