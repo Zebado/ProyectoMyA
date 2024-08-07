@@ -31,8 +31,5 @@ public class AttackState : Entity
 
     public void Exit()
     {
-
     }
-
-
 }
