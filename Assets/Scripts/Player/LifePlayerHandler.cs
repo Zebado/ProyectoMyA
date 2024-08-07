@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LifePlayerHandler : MonoBehaviour
+public class LifePlayerHandler : MonoBehaviour, ILife
 {
     public int currentLife { get; private set; }
     public int LifeMax { get; private set; } = 3;
@@ -10,7 +10,7 @@ public class LifePlayerHandler : MonoBehaviour
 
     float _damageTime;
     float _damageTimeMax;
-    [SerializeField] bool _isInvulnerable;
+    bool _isInvulnerable;
     [SerializeField] GameObject _hud;
 
     private void OnEnable()
@@ -40,7 +40,7 @@ public class LifePlayerHandler : MonoBehaviour
     }
     public void setMaxLife()
     {
-        currentLife = LifeMax;  
+        currentLife = LifeMax;
     }
     public void ActiveHud()
     {
@@ -48,9 +48,8 @@ public class LifePlayerHandler : MonoBehaviour
     }
     private void SubstractLifeDelegate(params object[] parameters)
     {
-        if (parameters.Length > 0 && parameters[0] is int)
+        if (parameters.Length > 0 && parameters[0] is int damage)
         {
-            int damage = (int)parameters[0];
             SubstractLife(damage);
         }
     }
@@ -97,5 +96,25 @@ public class LifePlayerHandler : MonoBehaviour
         {
             Ondead();
         }
+    }
+
+    public void TakeDamage(int amount)
+    {
+        currentLife -= amount;
+        if (currentLife < 0) currentLife = 0;
+    }
+
+    public int GetCurrentLife()
+    {
+        return currentLife;
+    }
+
+    public int GetMaxLife()
+    {
+        return LifeMax;
+    }
+    public void SetInvulnerable(bool value)
+    {
+        _isInvulnerable = value;
     }
 }
