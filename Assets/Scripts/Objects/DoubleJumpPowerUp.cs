@@ -15,6 +15,7 @@ public class DoubleJumpPowerUp : MonoBehaviour
 
     private void EnableDoubleJump(GameObject player)
     {
+        Debug.Log("doble salto disponible");
         PMovementController movController = player.GetComponent<PMovementController>();
         if(movController != null)
         {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,28 +6,32 @@ using UnityEngine;
 public class DoubleJump : MonoBehaviour, IJump
 {
     IJump _jump;
-    bool _canDoubleJump = false;
+    public bool doubleJump { get; set; }
 
     public void Initialize(IJump jump)
     {
         _jump = jump;
+        doubleJump = true;
     }
     public bool CanJump()
     {
-        return CheckGround.isGrounded || _canDoubleJump;
+        return CheckGround.isGrounded || doubleJump;
     }
-
     public void Jump()
     {
-        if (CheckGround.isGrounded)
+        if (CanJump())
         {
-            _jump.Jump();
-            _canDoubleJump = true;
-        }
-        else if (_canDoubleJump)
-        {
-            _jump.Jump();
-            _canDoubleJump = false;
+            if (CheckGround.isGrounded)
+            {
+                _jump.Jump();
+                doubleJump = false;
+                Debug.Log("deberia ponerse falso");
+            }
+            else if (doubleJump)
+            {
+                _jump.Jump();
+                doubleJump = false;
+            }
         }
     }
 }

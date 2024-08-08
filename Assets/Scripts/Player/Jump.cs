@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Jump : MonoBehaviour, IJump
@@ -5,6 +7,7 @@ public class Jump : MonoBehaviour, IJump
     public float jumpForce = 4.7f;
     Rigidbody2D _rb;
 
+    public bool doubleJump { get; set; }
 
     private void Awake()
     {
@@ -17,7 +20,7 @@ public class Jump : MonoBehaviour, IJump
 
     void IJump.Jump()
     {
-        if(CheckGround.isGrounded)
+        if(CanJump())
             _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 }

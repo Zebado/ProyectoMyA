@@ -50,8 +50,11 @@ public class PMovementController : MonoBehaviour
     }
     public void AddDoubleJump()
     {
-        DoubleJump doubleJump = gameObject.AddComponent<DoubleJump>();
-        doubleJump.Initialize(_jump);
-        _jump = doubleJump;
+        if (!(_jump is DoubleJump))
+        {
+            DoubleJump doubleJump = gameObject.GetComponent<DoubleJump>();
+            doubleJump.Initialize(_jump);
+            _jump = doubleJump;
+        }
     }
 }
