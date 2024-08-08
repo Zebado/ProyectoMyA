@@ -5,14 +5,15 @@ public class PMovementController : MonoBehaviour
 {
     [SerializeField] Transform _player;
     [SerializeField] float _speed;
-    [SerializeField] float _jumpForce;
     Rigidbody2D _rgbd;
     PInputManager _managerInput;
+    IJump _jump;
 
     private void Awake()
     {
         _rgbd = GetComponent<Rigidbody2D>();
         _managerInput = GetComponent<PInputManager>();
+        _jump = GetComponent<IJump>();
     }
     private void OnEnable()
     {
@@ -45,9 +46,12 @@ public class PMovementController : MonoBehaviour
     }
     void Jump()
     {
-        if (CheckGround.isGrounded)
-        {
-            _rgbd.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
-        }
+        _jump.Jump();
+    }
+    public void AddDoubleJump()
+    {
+        DoubleJump doubleJump = gameObject.AddComponent<DoubleJump>();
+        doubleJump.Initialize(_jump);
+        _jump = doubleJump;
     }
 }

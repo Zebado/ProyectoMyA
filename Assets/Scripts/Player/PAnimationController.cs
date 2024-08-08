@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PInputManager))]
-
 public class PAnimationController : MonoBehaviour
 {
     [SerializeField] Animator _animator;
