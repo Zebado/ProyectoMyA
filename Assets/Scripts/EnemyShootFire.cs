@@ -17,7 +17,7 @@ public class EnemyShootFire : MonoBehaviour
         if (_CurrentTime >= _maxTime)
         {
             _CurrentTime = 0;
-            var bullet = BulletFactory.Instance.GetObjectFromPool();    
+            var bullet = BulletFactory.Instance.GetObjectFromPool(EnumBullet.FireBullet);    
             bullet.transform.position = _point.transform.position;
         }
     }

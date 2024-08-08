@@ -13,20 +13,21 @@ public class DoubleJump : MonoBehaviour, IJump
     }
     public bool CanJump()
     {
-        return CheckGround.isGrounded || _canDoubleJump;
+        Debug.Log(_jump);
+        return _jump.CanJump() || _canDoubleJump;
     }
-
+    private void Update()
+    {
+        if (_jump == null) return;
+        Debug.Log(CanJump());
+    }
     public void Jump()
     {
         if (CheckGround.isGrounded)
-        {
-            _jump.Jump();
             _canDoubleJump = true;
-        }
-        else if (_canDoubleJump)
-        {
-            _jump.Jump();
+        else
             _canDoubleJump = false;
-        }
+
+        _jump.Jump();
     }
 }

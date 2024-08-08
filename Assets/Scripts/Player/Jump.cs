@@ -17,7 +17,6 @@ public class Jump : MonoBehaviour, IJump
 
     void IJump.Jump()
     {
-        if(CheckGround.isGrounded)
-            _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        _rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 }

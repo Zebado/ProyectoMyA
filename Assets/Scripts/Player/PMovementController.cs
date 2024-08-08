@@ -46,7 +46,10 @@ public class PMovementController : MonoBehaviour
     }
     void Jump()
     {
-        _jump.Jump();
+        if (_jump.CanJump())
+        {
+            _jump.Jump();
+        }
     }
     public void AddDoubleJump()
     {

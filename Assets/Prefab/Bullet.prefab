@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timeLine: 3
   _speed: 3
+  <type>k__BackingField: 1
 --- !u!114 &2831217791827489761
 MonoBehaviour:
   m_ObjectHideFlags: 0

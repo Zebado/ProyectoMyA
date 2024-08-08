@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RangeEnemy : EnemyBase
 {
+    [SerializeField] Transform _point;
     private void Start()
     {
         enemyState = new EnemyState();
@@ -16,5 +17,10 @@ public class RangeEnemy : EnemyBase
     public override void Attack()
     {
         _enemyAnimatior.AttackAnimation();
+    }
+    public void CreateArrow()
+    {
+        var bullet = BulletFactory.Instance.GetObjectFromPool(EnumBullet.ArrowBullet);
+        bullet.transform.position = _point.transform.position;
     }
 }

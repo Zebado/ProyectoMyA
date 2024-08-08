@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] float _timeLine = 3;
     float _currentLifeTime;
     [SerializeField] float _speed;
+    [field:SerializeField] public EnumBullet type { get; private set; }
 
     private void OnEnable()
     {
@@ -19,7 +20,6 @@ public class Bullet : MonoBehaviour
         if (_currentLifeTime <= _timeLine) return;
 
         BulletFactory.Instance.ReturnObjectToPool(this);
-
     }
     private void Reset()
     {
@@ -38,6 +38,6 @@ public class Bullet : MonoBehaviour
     {
         Debug.Log(collision);
         BulletFactory.Instance.ReturnObjectToPool(this);
-        TurnOff(this); 
+        TurnOff(this);
     }
 }

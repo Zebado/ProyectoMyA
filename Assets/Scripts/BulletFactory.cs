@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class BulletFactory : MonoBehaviour
 {
-
-    [SerializeField] Bullet _bulletPrefab;
+    [SerializeField] Bullet _bulletPrefabFire;
+    [SerializeField] Bullet _bulletPrefabArrow;
     [SerializeField] int _initialAmount;
-    Pool<Bullet> _bulletPool;
+    Pool<Bullet> _bulletPoolArrow;
+    Pool<Bullet> _bulletPoolFire;
     public static BulletFactory Instance { get; private set; }
 
     private void Awake()
@@ -19,19 +20,39 @@ public class BulletFactory : MonoBehaviour
         }
         Instance = this;
 
-       _bulletPool = new Pool<Bullet>(CreateObject, Bullet.TurnOn, Bullet.TurnOff, _initialAmount);
+        _bulletPoolArrow = new Pool<Bullet>(CreateBulletArrow, Bullet.TurnOn, Bullet.TurnOff, _initialAmount);
+        _bulletPoolFire = new Pool<Bullet>(CreateBulletFire, Bullet.TurnOn, Bullet.TurnOff, _initialAmount);
     }
 
-    Bullet CreateObject()
+    Bullet CreateBulletArrow()
     {
-        return Instantiate(_bulletPrefab);
+        return Instantiate(_bulletPrefabArrow);
     }
-    public Bullet GetObjectFromPool()
+    Bullet CreateBulletFire()
     {
-        return _bulletPool.GetObject();
+        return Instantiate(_bulletPrefabFire);
     }
-    public void ReturnObjectToPool(Bullet obj)
+    public Bullet GetObjectFromPool(EnumBullet bullet)
     {
-        _bulletPool.ReturnObjectToPool(obj);
+        switch (bullet)
+        {
+            case EnumBullet.ArrowBullet:
+                return _bulletPoolArrow.GetObject();
+            case EnumBullet.FireBullet:
+                return _bulletPoolFire.GetObject();
+        }
+        return null;
+    }
+    public void ReturnObjectToPool(Bullet bullet)
+    {
+        switch (bullet.type)
+        {
+            case EnumBullet.ArrowBullet:
+                _bulletPoolArrow.ReturnObjectToPool(bullet);
+                break;
+            case EnumBullet.FireBullet:
+                _bulletPoolFire.ReturnObjectToPool(bullet);
+                break;
+        }
     }
 }

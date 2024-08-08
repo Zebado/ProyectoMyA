@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 using System;
 
@@ -28,7 +27,6 @@ public class Pool<T>
             _currentStock.Add(obj);
         }
     }
-
     public T GetObject()
     {
         T result;
