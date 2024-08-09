@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4528800728337655900}
   - component: {fileID: 8748631330881339558}
   - component: {fileID: 5483191904189237182}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CrazyEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
