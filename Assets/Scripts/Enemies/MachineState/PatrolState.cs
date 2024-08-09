@@ -24,15 +24,17 @@ public class PatrolState : Entity
         if (enemy.IsPlayerInRange(enemy.attackRange))
         {
             enemy.enemyState.ChangeState(new AttackState(), enemy);
+            return;
         }
         if (enemy.IsPlayerInRange(enemy.chaseRange))
         {
             enemy.enemyState.ChangeState(new ChaseState(), enemy);
+            return;
         }
         Transform targetPoint = _moveTo ? _pointB : _pointA;
         enemy.MoveTowards(targetPoint.position);
 
-        if (Vector2.Distance(enemy.transform.position, targetPoint.position) < 0.1f)
+        if (Vector2.Distance(enemy.transform.position, targetPoint.position) < 0.5f)
         {
             _moveTo = !_moveTo;
         }

@@ -12,11 +12,13 @@ public abstract class EnemyBase : MonoBehaviour, Enemy
     public float attackRange;
     public float chaseRange;
     public EnemyState enemyState;
+    Rigidbody2D _rg2d;
     public bool isDead { get; private set; }
 
     private void Awake()
     {
         _enemyAnimatior = GetComponent<EnemyAnimator>();
+        _rg2d = GetComponent<Rigidbody2D>();
         if (enemyState == null)
         {
             enemyState = new EnemyState();
@@ -45,8 +47,8 @@ public abstract class EnemyBase : MonoBehaviour, Enemy
     internal void MoveTowards(Vector2 target)
     {
         if (isDead) return;
-        Vector2 direction = target - (Vector2)transform.position;
-        transform.position = Vector2.MoveTowards(transform.position, target, _speed * Time.deltaTime);
+        Vector2 direction = new Vector2(target.x - transform.position.x, 0);
+        _rg2d.velocity = new Vector2(direction.x * _speed, _rg2d.velocity.y).normalized;
         _enemyAnimatior.WalkAnimation();
 
         FaceDirection(direction);
@@ -80,7 +82,7 @@ public abstract class EnemyBase : MonoBehaviour, Enemy
         }
         if (targetPlayer != null)
         {
-            return Vector2.Distance(transform.position, targetPlayer.position) <= distance;
+            return Mathf.Abs(transform.position.x - targetPlayer.position.x) <= distance;
         }
         return false;
     }
