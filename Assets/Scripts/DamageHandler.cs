@@ -13,5 +13,9 @@ public class DamageHandler : MonoBehaviour
         {
             EventManager.TriggerEvent(EventsType.Event_SubstractLife, _damage);
         }
+        else
+        {
+            _damage = 0;
+        }
     }
 }

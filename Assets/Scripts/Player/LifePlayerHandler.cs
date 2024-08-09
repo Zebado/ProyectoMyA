@@ -11,6 +11,7 @@ public class LifePlayerHandler : MonoBehaviour, ILife
     float _damageTime;
     float _damageTimeMax;
     bool _isInvulnerable;
+    bool _isShield;
     [SerializeField] GameObject _hud;
 
     private void OnEnable()
@@ -21,22 +22,34 @@ public class LifePlayerHandler : MonoBehaviour, ILife
 
     private void Awake()
     {
-        currentLife = LifeMax;
         _onDead = false;
         _isInvulnerable = false;
         _damageTime = 0;
-        _damageTimeMax = 3;
+        _damageTimeMax = 1;
+    }
+    private void Start()
+    {
+        if (currentLife == 0)
+        {
+            setMaxLife();
+        }
     }
     private void Update()
     {
+        if (_isShield) return;
         if (_isInvulnerable)
         {
             _damageTime += Time.deltaTime;
             if (_damageTime > _damageTimeMax)
             {
                 _isInvulnerable = false;
+                _damageTime = 0;
             }
         }
+    }
+    public void SetShieldInvulnerable(bool value)
+    {
+        _isShield = value;
     }
     public void setMaxLife()
     {
@@ -55,8 +68,9 @@ public class LifePlayerHandler : MonoBehaviour, ILife
     }
     private void SubstractLife(int damage)
     {
-        if (_isInvulnerable || _onDead) return;
-        currentLife -= damage > 1 ? damage : 1;
+        if (_isInvulnerable || _isShield || _onDead) return;
+        Debug.Log("daño recibido" + damage);
+        currentLife -= Mathf.Max(damage, 1);
         _isInvulnerable = true;
         if (currentLife <= 0)
         {
@@ -91,7 +105,8 @@ public class LifePlayerHandler : MonoBehaviour, ILife
     }
     public void SetCurrentLife(int life)
     {
-        currentLife = life;
+        Debug.Log($"SetCurrentLife llamado: Vida actual: {currentLife}, Nueva vida: {life}");
+            currentLife = life;
         if (currentLife <= 0)
         {
             Ondead();
@@ -106,6 +121,10 @@ public class LifePlayerHandler : MonoBehaviour, ILife
 
     public int GetCurrentLife()
     {
+        if(currentLife == 0)
+        {
+            return LifeMax;
+        }
         return currentLife;
     }
 

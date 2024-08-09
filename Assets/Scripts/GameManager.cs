@@ -94,6 +94,10 @@ public class GameManager : MonoBehaviour
         }
         else if (currentSceneIndex == 2)
         {
+            SceneManager.LoadScene(3);
+        }
+        else if (currentSceneIndex == 3)
+        {
             SceneManager.LoadScene(0);
         }
     }

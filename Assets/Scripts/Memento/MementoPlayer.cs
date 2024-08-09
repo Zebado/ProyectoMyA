@@ -23,13 +23,16 @@ public class MementoPlayer : MonoBehaviour, IMemento, ICheckpointTrigger, IRespa
     public Memento SaveState()
     {
         position = transform.position;
-        return new Memento(position, lifeHandler.currentLife);
+        int currentHealth = lifeHandler.GetCurrentLife();
+        Debug.Log($"Guardando estado: Posición = {position}, Salud actual = {currentHealth}");
+        Debug.Log(lifeHandler.GetCurrentLife());
+        return new Memento(position, currentHealth);
     }
 
     public void RestoreState(Memento memento)
     {
         SetPosition(memento.PlayerPosition);
-        lifeHandler.SetCurrentLife(memento.PlayerHealth);
+        lifeHandler.SetCurrentLife(lifeHandler.GetCurrentLife());
     }
     public void ActivateCheckpoint()
     {

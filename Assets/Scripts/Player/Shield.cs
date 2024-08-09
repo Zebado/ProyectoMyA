@@ -2,21 +2,23 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour, ILife
 {
-     ILife _life;
-     int _shieldPoints;
+    ILife _life;
+    bool _shieldActive;
     GameObject _shieldObject;
     LifePlayerHandler _playerHandler;
 
-    public void Initialize(ILife life, int shieldPoints, GameObject shieldVisualPrefab,LifePlayerHandler playerHandler)
+    public void Initialize(ILife life, GameObject shieldVisualPrefab, LifePlayerHandler playerHandler)
     {
         _life = life;
-        _shieldPoints = shieldPoints;
+        _shieldActive = true;
         _shieldObject = Instantiate(shieldVisualPrefab, transform);
         _shieldObject.SetActive(true);
         _playerHandler = playerHandler;
 
-        EventManager.SusbcribeToEvent(EventsType.Event_SubstractLife, OnDamageTaken);
         _playerHandler.SetInvulnerable(true);
+        _playerHandler.SetShieldInvulnerable(true);
+
+        EventManager.SusbcribeToEvent(EventsType.Event_SubstractLife, OnDamageTaken);
     }
     private void OnDamageTaken(params object[] parameters)
     {
@@ -35,18 +37,14 @@ public class Shield : MonoBehaviour, ILife
     }
     public void TakeDamage(int amount)
     {
-        if (_shieldPoints > 0)
+        if (_shieldActive)
         {
-            int damageAbsorbed = Mathf.Min(amount, _shieldPoints);
-            _shieldPoints -= damageAbsorbed;
-            amount -= damageAbsorbed;
-            if (_shieldPoints <= 0)
-            {
-                _shieldObject.SetActive(false);
-                _playerHandler.SetInvulnerable(false);
-            }
+            _shieldActive = false;
+            _shieldObject.SetActive(false);
+            _playerHandler.SetShieldInvulnerable(false);
+            _playerHandler.SetInvulnerable(false);
         }
-        if (amount > 0)
+        else
         {
             _life.TakeDamage(amount);
         }

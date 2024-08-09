@@ -14,7 +14,6 @@ public class EnemyAnimator : MonoBehaviour
     {
         _anim.SetTrigger("Walk");
     }
-
     public void AttackAnimation()
     {
         _anim.SetTrigger("Attack");
@@ -22,6 +21,5 @@ public class EnemyAnimator : MonoBehaviour
     public void DeathAnimation()
     {
         _anim.SetTrigger("Death");
-
     }
 }
