@@ -15,8 +15,9 @@ public class Door : MonoBehaviour
         if (_win) return;
         if (collision.gameObject.CompareTag("Player"))
         {
-            _win = true;
-            EventManager.TriggerEvent(EventsType.Event_Win);
+            //_win = true;
+            //EventManager.TriggerEvent(EventsType.Event_Win);
+            GameManager.Instance.PlayerReachedDoor();
         }
     }
 }

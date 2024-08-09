@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class GameManager : MonoBehaviour
     public bool winGame { get; private set; } = false;
 
     [SerializeField] GameObject _hudLanguage;
+    GameObject _victoryHud;
     Stack<Memento> _checkpoints = new Stack<Memento>();
     List<IMemento> _iMemento = new List<IMemento>();
     private void Awake()
@@ -29,6 +31,15 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         SaveInitialCheckpoint();
+        GameObject hudObject = GameObject.Find("HUD");
+        if (hudObject != null)
+        {
+            _victoryHud = hudObject.transform.Find("Win")?.gameObject;
+            if (_victoryHud != null)
+            {
+                _victoryHud.SetActive(false);
+            }
+        }
     }
     public void RegisterIMemento(IMemento memento)
     {
@@ -84,22 +95,8 @@ public class GameManager : MonoBehaviour
         winGame = false;
 
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        if (currentSceneIndex == 0)
-        {
-            SceneManager.LoadScene(1);
-        }
-        else if (currentSceneIndex == 1)
-        {
-            SceneManager.LoadScene(2);
-        }
-        else if (currentSceneIndex == 2)
-        {
-            SceneManager.LoadScene(3);
-        }
-        else if (currentSceneIndex == 3)
-        {
-            SceneManager.LoadScene(0);
-        }
+        int nextSceneIndex = (currentSceneIndex + 1) % 4;
+        SceneManager.LoadScene(nextSceneIndex);
     }
     public void ExitGame()
     {
@@ -116,5 +113,23 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         EventManager.UnsusbcribeToEvent(EventsType.Event_Win, WinGame);
+    }
+
+    internal void PlayerReachedDoor()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        if (currentSceneIndex == 3)
+        {
+            winGame = true;
+            if (_victoryHud != null)
+            {
+                _victoryHud.SetActive(true);
+            }
+        }
+        else
+        {
+            ChangeScene();
+        }
     }
 }
