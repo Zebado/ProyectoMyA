@@ -90,6 +90,10 @@ public class GameManager : MonoBehaviour
             _checkpoints.Push(memento);
         }
     }
+    public void MenuScene()
+    {
+        SceneManager.LoadScene("Menu");
+    }
     public void ChangeScene()
     {
         winGame = false;

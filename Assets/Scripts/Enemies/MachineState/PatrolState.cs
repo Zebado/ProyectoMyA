@@ -32,7 +32,7 @@ public class PatrolState : Entity
         Transform targetPoint = _moveTo ? _pointB : _pointA;
         enemy.MoveTowards(targetPoint.position);
 
-        if (Vector2.Distance(enemy.transform.position, targetPoint.position) < 0.1f)
+        if (Vector2.Distance(enemy.transform.position, targetPoint.position) < 0.4f)
         {
             _moveTo = !_moveTo;
         }
