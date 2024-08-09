@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyMelee : EnemyBase
 {
-    public float chaseRange;
     public Transform pointA;
     public Transform pointB;
     private void Start()

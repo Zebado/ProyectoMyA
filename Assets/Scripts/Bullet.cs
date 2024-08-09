@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     float _currentLifeTime;
     [SerializeField] float _speed;
     [field:SerializeField] public EnumBullet type { get; private set; }
+    Vector2 _direction;
 
     private void OnEnable()
     {
@@ -15,7 +16,7 @@ public class Bullet : MonoBehaviour
     }
     void Update()
     {
-        transform.Translate(-Vector3.right * _speed * Time.deltaTime);
+        transform.Translate(_direction * _speed * Time.deltaTime);
         _currentLifeTime += Time.deltaTime;
         if (_currentLifeTime <= _timeLine) return;
 
@@ -34,9 +35,12 @@ public class Bullet : MonoBehaviour
         bullet.Reset();
         bullet.gameObject.SetActive(false);
     }
+    public void SetDirection(Vector2 direction)
+    {
+        _direction = direction.normalized;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision);
         BulletFactory.Instance.ReturnObjectToPool(this);
         TurnOff(this);
     }

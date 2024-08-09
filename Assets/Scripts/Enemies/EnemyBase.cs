@@ -10,6 +10,7 @@ public abstract class EnemyBase : MonoBehaviour, Enemy
     protected EnemyAnimator _enemyAnimatior;
     public Transform targetPlayer;
     public float attackRange;
+    public float chaseRange;
     public EnemyState enemyState;
     public bool isDead { get; private set; }
 
@@ -48,11 +49,25 @@ public abstract class EnemyBase : MonoBehaviour, Enemy
         transform.position = Vector2.MoveTowards(transform.position, target, _speed * Time.deltaTime);
         _enemyAnimatior.WalkAnimation();
 
+        FaceDirection(direction);
+    }
+    internal void FacePlayer()
+    {
+        if (targetPlayer != null)
+        {
+            Vector2 direction = targetPlayer.position - transform.position;
+            FaceDirection(direction);
+        }
+    }
+
+    private void FaceDirection(Vector2 direction)
+    {
         if (direction.x > 0)
             transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         else if (direction.x < 0)
             transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
     }
+
     public bool IsPlayerInRange(float distance)
     {
         if (targetPlayer == null)

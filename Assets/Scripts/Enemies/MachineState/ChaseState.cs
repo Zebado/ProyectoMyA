@@ -13,7 +13,6 @@ public class ChaseState : Entity
     public void Execute(EnemyBase enemy)
     {
         if (enemy == null || enemy.isDead) return;
-        if (_enemy == null) return;
         if (_enemy.IsPlayerInRange(_enemy.attackRange))
         {
             _enemy.enemyState.ChangeState(new AttackState(), _enemy);

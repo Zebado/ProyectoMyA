@@ -13,9 +13,9 @@ public class AttackState : Entity
     public void Execute(EnemyBase enemy)
     {
         if (enemy == null || enemy.isDead) return;
-        if (_enemy == null) return;
         if (_enemy.IsPlayerInRange(_enemy.attackRange))
         {
+            _enemy.FacePlayer();
             _enemy.Attack();
         }
         else

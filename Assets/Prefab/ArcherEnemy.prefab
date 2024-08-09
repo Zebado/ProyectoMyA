@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 5397059211497299270}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.139, y: 0.095, z: 0}
+  m_LocalPosition: {x: 0.241, y: 0.056, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -63,7 +63,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.7601142, y: 0.8689864, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2493020227037932156}
@@ -149,6 +149,7 @@ MonoBehaviour:
   _speed: 2
   targetPlayer: {fileID: 0}
   attackRange: 2
+  chaseRange: 0
   _point: {fileID: 2493020227037932156}
 --- !u!95 &3495190949462071791
 Animator:
@@ -230,7 +231,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.017714262, y: 0.038971424}
+  m_Offset: {x: -0.059163094, y: 0.038971424}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -241,5 +242,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2242322, y: 0.30926037}
+  m_Size: {x: 0.14133453, y: 0.30926037}
   m_EdgeRadius: 0

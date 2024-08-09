@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healt: 1
-  _speed: 2
+  _speed: 1.5
   targetPlayer: {fileID: 0}
   attackRange: 0.5
   chaseRange: 2
