@@ -20,6 +20,8 @@ public class PatrolState : Entity
 
     public void Execute(EnemyBase enemy)
     {
+        if (enemy == null || enemy.isDead) return;
+
         Transform targetPoint = _moveTo ? _pointB : _pointA;
 
         enemy.MoveTowards(targetPoint.position);

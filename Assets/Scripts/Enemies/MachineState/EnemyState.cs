@@ -19,7 +19,7 @@ public class EnemyState
 
     public void Update()
     {
-        if (_currentState != null)
+        if (_enemy != null && !_enemy.isDead && _currentState != null)
         {
             _currentState.Execute(_enemy);
         }

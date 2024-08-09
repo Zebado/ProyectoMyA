@@ -15,11 +15,13 @@ public class EnemyMelee : EnemyBase
 
     private void Update()
     {
-        enemyState.Update();
+        if (!isDead)
+            enemyState.Update();
     }
     public override void Attack()
     {
-        _enemyAnimatior.AttackAnimation();
+        if (!isDead)
+            _enemyAnimatior.AttackAnimation();
     }
     public void SetPatrolPoints(Transform pointA, Transform pointB)
     {

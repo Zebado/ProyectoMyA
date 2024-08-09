@@ -11,6 +11,7 @@ public abstract class EnemyBase : MonoBehaviour, Enemy
     public Transform targetPlayer;
     public float attackRange;
     public EnemyState enemyState;
+    public bool isDead { get; private set; }
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public abstract class EnemyBase : MonoBehaviour, Enemy
 
     public void TakeDamage(int damage)
     {
+        if (isDead) return;
         _healt -= damage;
         if (_healt <= 0)
         {
@@ -41,6 +43,7 @@ public abstract class EnemyBase : MonoBehaviour, Enemy
     }
     internal void MoveTowards(Vector2 target)
     {
+        if (isDead) return;
         Vector2 direction = target - (Vector2)transform.position;
         transform.position = Vector2.MoveTowards(transform.position, target, _speed * Time.deltaTime);
         _enemyAnimatior.WalkAnimation();
@@ -68,7 +71,13 @@ public abstract class EnemyBase : MonoBehaviour, Enemy
     }
     protected virtual void Death()
     {
+        if (isDead) return;
+        isDead = true;
         _enemyAnimatior.DeathAnimation();
+    }
+    public void DestroyEnemi()
+    {
         Destroy(gameObject);
+
     }
 }

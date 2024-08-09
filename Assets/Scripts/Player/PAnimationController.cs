@@ -24,6 +24,7 @@ public class PAnimationController : MonoBehaviour
         _managerInput.OnMoveLeft += MoveLeft;
         _managerInput.OnInputStopped += StopAnimationRun;
         _managerInput.OnJump += JumpAnimation;
+        _managerInput.OnAttack += AttackAnimation;
         EventManager.SusbcribeToEvent(EventsType.Event_PlayerDead, OnPlayerDead);
         EventManager.SusbcribeToEvent(EventsType.Event_SubstractLife, HurtAnimation);
     }
@@ -49,7 +50,7 @@ public class PAnimationController : MonoBehaviour
         if (_isDead) return;
         _animator.SetTrigger("Hurt");
     }
-    void PlayAttack()
+    void AttackAnimation()
     {
         _animator.SetBool("Attack1", true);
     }
