@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(PInputManager))]
@@ -15,6 +16,12 @@ public class PMovementController : MonoBehaviour
         _managerInput = GetComponent<PInputManager>();
         _jump = GetComponent<IJump>();
     }
+
+    internal void Let(Action spawnEnemies)
+    {
+        throw new NotImplementedException();
+    }
+
     private void OnEnable()
     {
         _managerInput.OnMoveRight += MoveRight;
