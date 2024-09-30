@@ -17,6 +17,7 @@ public class HudPlayer : MonoBehaviour
         EventManager.SusbcribeToEvent(EventsType.Event_SubstractLife, DisableHeart);
         EventManager.SusbcribeToEvent(EventsType.Event_RecoverLife, ActiveHeart);
         EventManager.SusbcribeToEvent(EventsType.Event_Win, WinGame);
+        EventManager.SusbcribeToEvent(EventsType.Event_PlayerDead, LoseGame);
     }
 
     private void WinGame(object[] parameters)
@@ -63,5 +64,6 @@ public class HudPlayer : MonoBehaviour
         EventManager.UnsusbcribeToEvent(EventsType.Event_SubstractLife, DisableHeart);
         EventManager.UnsusbcribeToEvent(EventsType.Event_RecoverLife, ActiveHeart);
         EventManager.UnsusbcribeToEvent(EventsType.Event_Win, WinGame);
+        EventManager.UnsusbcribeToEvent(EventsType.Event_PlayerDead, LoseGame);
     }
 }

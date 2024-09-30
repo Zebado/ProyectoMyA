@@ -3,8 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyRace
+{
+    Melee,
+    Range
+}
 public abstract class EnemyBase : MonoBehaviour, Enemy
 {
+    public EnemyRace race { get; set; }
+    public int enemiesKilled { get; set; }
     [SerializeField] int _healt;
     [SerializeField] float _speed;
     protected EnemyAnimator _enemyAnimatior;
@@ -89,6 +96,7 @@ public abstract class EnemyBase : MonoBehaviour, Enemy
         if (isDead) return;
         isDead = true;
         _enemyAnimatior.DeathAnimation();
+        GameManager.Instance.EnemyKilled(race);
     }
     public void DestroyEnemi()
     {

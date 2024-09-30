@@ -15,8 +15,6 @@ public class EnemySpawner : MonoBehaviour
         PMovementController player = collision.GetComponent<PMovementController>();
         if (player != null)
             StartCoroutine(SpawnEnemies());
-
-        SpawnEnemies();
     }
 
     private IEnumerator SpawnEnemies()  //timeslicing de spawn de enemigos y linq grupos

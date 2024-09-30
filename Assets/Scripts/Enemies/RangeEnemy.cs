@@ -7,6 +7,7 @@ public class RangeEnemy : EnemyBase
     [SerializeField] Transform _point;
     private void Start()
     {
+        race = EnemyRace.Range;
         enemyState = new EnemyState();
         enemyState.ChangeState(new IdleState(), this);
     }

@@ -8,6 +8,7 @@ public class EnemyMelee : EnemyBase
     public Transform pointB;
     private void Start()
     {
+        race = EnemyRace.Melee;
         enemyState = new EnemyState();
         enemyState.ChangeState(new PatrolState(pointA, pointB), this);
     }

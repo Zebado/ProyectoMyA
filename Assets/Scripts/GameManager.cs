@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,12 @@ public class GameManager : MonoBehaviour
     GameObject _victoryHud;
     Stack<Memento> _checkpoints = new Stack<Memento>();
     List<IMemento> _iMemento = new List<IMemento>();
+
+    Dictionary<EnemyRace, int> enemiesKilled = new Dictionary<EnemyRace, int>
+    {
+        {EnemyRace.Melee, 0 },
+        {EnemyRace.Range, 0 }
+    };
     private void Awake()
     {
         if (Instance == null)
@@ -90,6 +97,26 @@ public class GameManager : MonoBehaviour
             _checkpoints.Push(memento);
         }
     }
+    public void EnemyKilled(EnemyRace race)
+    {
+        if (enemiesKilled.ContainsKey(race))
+            enemiesKilled[race]++;
+        else
+            enemiesKilled[race] = 1;
+        ViewResume();
+    }
+
+    private void ViewResume() //usamos aggregate para recorrer nuestro diccionario y luego un lo pasamos como un unico resultado por un tipo anonimo para no definir una clase.
+    {
+        var resume = enemiesKilled.Aggregate(new { Melee = 0, Range = 0 }, (acumulador, key) =>
+        {
+            return key.Key == EnemyRace.Melee ?
+               new { Melee = acumulador.Melee + key.Value, acumulador.Range } :
+               new { acumulador.Melee, Range = acumulador.Range + key.Value };
+        });
+        Debug.Log($"Enemigos Melee derrotados: {resume.Melee}, Enemigos Rango derrotados: {resume.Range}");
+    }
+
     public void MenuScene()
     {
         SceneManager.LoadScene("Menu");

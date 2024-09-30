@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class LanguageSplit
 {
@@ -14,8 +15,7 @@ public class LanguageSplit
         var lines = sheet.Split(new[] { '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
 
         bool firstLine = true;
-
-
+        
         foreach (var line in lines)
         {
             var cells = line.Split(',');
