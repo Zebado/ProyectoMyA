@@ -66,16 +66,37 @@ public class LifePlayerHandler : MonoBehaviour, ILife
             SubstractLife(damage);
         }
     }
-    private void SubstractLife(int damage)
+    //private void SubstractLife(int damage)
+    //{
+    //    if (_isInvulnerable || _isShield || _onDead) return;
+    //    Debug.Log("daño recibido" + damage);
+    //    currentLife -= Mathf.Max(damage, 1);
+    //    _isInvulnerable = true;
+    //    if (currentLife <= 0)
+    //    {
+    //        Ondead();
+    //    }
+    //}
+    private (int currentLife, bool isInvulnerable) SubstractLife(int damage) //tupla 
     {
-        if (_isInvulnerable || _isShield || _onDead) return;
-        Debug.Log("daño recibido" + damage);
+        //if (_isInvulnerable || _isShield || _onDead) return (currentLife, _isInvulnerable);
+
+        if (_isShield)
+        {
+            _isShield = false; 
+            _isInvulnerable = true;
+            return (currentLife, _isInvulnerable);
+        }
+
         currentLife -= Mathf.Max(damage, 1);
         _isInvulnerable = true;
+
         if (currentLife <= 0)
         {
             Ondead();
         }
+
+        return (currentLife, _isInvulnerable);
     }
     private void RecoverLife(params object[] parameters)
     {
@@ -106,7 +127,7 @@ public class LifePlayerHandler : MonoBehaviour, ILife
     public void SetCurrentLife(int life)
     {
         Debug.Log($"SetCurrentLife llamado: Vida actual: {currentLife}, Nueva vida: {life}");
-            currentLife = life;
+        currentLife = life;
         if (currentLife <= 0)
         {
             Ondead();
@@ -121,7 +142,7 @@ public class LifePlayerHandler : MonoBehaviour, ILife
 
     public int GetCurrentLife()
     {
-        if(currentLife == 0)
+        if (currentLife == 0)
         {
             return LifeMax;
         }

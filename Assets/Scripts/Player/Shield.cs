@@ -42,7 +42,7 @@ public class Shield : MonoBehaviour, ILife
             _shieldActive = false;
             _shieldObject.SetActive(false);
             _playerHandler.SetShieldInvulnerable(false);
-            _playerHandler.SetInvulnerable(false);
+            _playerHandler.SetInvulnerable(true);
         }
         else
         {
