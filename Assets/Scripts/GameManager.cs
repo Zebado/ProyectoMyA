@@ -103,10 +103,10 @@ public class GameManager : MonoBehaviour
             enemiesKilled[race]++;
         else
             enemiesKilled[race] = 1;
-        ViewResume();
+        DataKills();
     }
 
-    private void ViewResume() //usamos aggregate para recorrer nuestro diccionario y luego un lo pasamos como un unico resultado por un tipo anonimo para no definir una clase.
+    private void DataKills() //usamos aggregate para recorrer nuestro diccionario y luego un lo pasamos como un unico resultado por un tipo anonimo para no definir una clase.
     {
         var resume = enemiesKilled.Aggregate(new { Melee = 0, Range = 0 }, (acumulador, key) =>
         {

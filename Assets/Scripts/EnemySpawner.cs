@@ -17,7 +17,7 @@ public class EnemySpawner : MonoBehaviour
             StartCoroutine(SpawnEnemies());
     }
 
-    private IEnumerator SpawnEnemies()  //timeslicing de spawn de enemigos y linq grupos
+    private IEnumerator SpawnEnemies()  //timeslicing y generator de spawn de enemigos y linq grupos
     {
         if (_enemies.Count == 0 || _spawnPoint.Length == 0) yield break;
         //Take and ToList, usamos el take para agarrar los puntos de spawn segun la cantidad de enemigos a instanciar y los convertimos a una lista.
@@ -28,14 +28,14 @@ public class EnemySpawner : MonoBehaviour
 
         int patrolIndex = 0;
 
-        foreach (var pair in enemiesSpawnPoints)
+        foreach (var point in enemiesSpawnPoints)
         {
-            GameObject enemyInstance = Instantiate(pair.Enemy, pair.spawnPoint.position, pair.spawnPoint.rotation);
+            GameObject enemyInstance = Instantiate(point.Enemy, point.spawnPoint.position, point.spawnPoint.rotation);
             EnemyMelee meleeEnemy = enemyInstance.GetComponent<EnemyMelee>();
 
             if (meleeEnemy != null && patrolIndex + 1 < _patrolPoints.Count)
             {
-                //buscamos los puntos, los asignamos y luego los convierot en lista
+                //buscamos los puntos de patrullaje, los asignamos y luego los convierot en lista
                 var patrolList = _patrolPoints.Skip(patrolIndex).Take(2).ToList();
                 meleeEnemy.SetPatrolPoints(patrolList[0], patrolList[1]);
 
